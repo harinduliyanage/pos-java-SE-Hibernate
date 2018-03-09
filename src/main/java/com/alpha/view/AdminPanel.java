@@ -710,9 +710,8 @@ public class AdminPanel extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(homeViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(homeViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel106, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(totalLable, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(totalLable, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel106, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(homeViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel107, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(todayIncomeLable, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -2608,6 +2607,11 @@ public class AdminPanel extends javax.swing.JFrame {
                 tableGRNMousePressed(evt);
             }
         });
+        tableGRN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tableGRNKeyPressed(evt);
+            }
+        });
         jScrollPane9.setViewportView(tableGRN);
         if (tableGRN.getColumnModel().getColumnCount() > 0) {
             tableGRN.getColumnModel().getColumn(0).setResizable(false);
@@ -2750,6 +2754,12 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel93.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel93.setForeground(new java.awt.Color(51, 51, 51));
         jLabel93.setText("Suplier Name");
+
+        suplierNameTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                suplierNameTxtKeyPressed(evt);
+            }
+        });
 
         onGRNAddingQtyTxt.setEditable(false);
         onGRNAddingQtyTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0.00"))));
@@ -4744,6 +4754,15 @@ public class AdminPanel extends javax.swing.JFrame {
                 }
             }
         }
+        if(evt.getKeyCode()==KeyEvent.VK_END){
+            suplierNameTxt.requestFocusInWindow();
+        }
+        if(evt.getKeyCode()==KeyEvent.VK_ESCAPE){
+            grnSearchByBarcodeTxt.selectAll();
+        }
+        if(evt.getKeyCode()==KeyEvent.VK_F1){
+            tableGRN.requestFocusInWindow();
+        }
     }//GEN-LAST:event_grnSearchByBarcodeTxtKeyPressed
 
     private void onGRNLISTBatchValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_onGRNLISTBatchValueChanged
@@ -4811,6 +4830,7 @@ public class AdminPanel extends javax.swing.JFrame {
                 }
                 centerRenderer.setHorizontalAlignment(JLabel.CENTER);
                 tableGRN.setDefaultRenderer(String.class, centerRenderer);
+                grnSearchByBarcodeTxt.requestFocusInWindow();
             } else {
                 JOptionPane.showMessageDialog(this, "Please Enter Adding Quantity");
             }
@@ -4895,6 +4915,7 @@ public class AdminPanel extends javax.swing.JFrame {
                     }
                     centerRenderer.setHorizontalAlignment(JLabel.CENTER);
                     tableGRN.setDefaultRenderer(String.class, centerRenderer);
+                    grnSearchByBarcodeTxt.requestFocusInWindow();
                 } else {
                     JOptionPane.showMessageDialog(this, "Please Enter Adding Quantity");
                 }
@@ -5132,6 +5153,33 @@ public class AdminPanel extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton3KeyPressed
+
+    private void suplierNameTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_suplierNameTxtKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            jButton12.doClick();
+        }
+        if(evt.getKeyCode()==KeyEvent.VK_ESCAPE){
+            grnSearchByBarcodeTxt.requestFocusInWindow();
+        }
+        if(evt.getKeyCode()==KeyEvent.VK_F1){
+            tableGRN.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_suplierNameTxtKeyPressed
+
+    private void tableGRNKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableGRNKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_DELETE){
+            jButton15.doClick();
+        }
+        if(evt.getKeyCode()==KeyEvent.VK_ESCAPE){
+            grnSearchByBarcodeTxt.requestFocusInWindow();
+        }
+        if(evt.getKeyCode()==KeyEvent.VK_F1){
+            tableGRN.requestFocusInWindow();
+        }
+        if(evt.getKeyCode()==KeyEvent.VK_END){
+            suplierNameTxt.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_tableGRNKeyPressed
 
     /**
      * @param args the command line arguments

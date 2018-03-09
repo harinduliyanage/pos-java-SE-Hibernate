@@ -1614,7 +1614,7 @@ public class CashierPanel extends javax.swing.JFrame {
         Paper paper = pf.getPaper();
 
         double middleHeight = middle;
-        double headerHeight = 2.0;
+        double headerHeight = 1.0;
         double footerHeight = 2.0;
         double width = convert_CM_To_PPI(8);      //printer know only point per inch.default value is 72ppi
         double height = convert_CM_To_PPI(headerHeight + middleHeight + footerHeight);
@@ -1641,7 +1641,7 @@ public class CashierPanel extends javax.swing.JFrame {
     }
 
     public void printBill(double numOfItems, OrderDTO o) {
-        double height = numOfItems * 4;
+        double height = numOfItems * 6;
         PrinterJob pj = PrinterJob.getPrinterJob();
         pj.setPrintable(new BillPrintable(o), getPageFormat(pj, height));
         try {
@@ -1782,7 +1782,7 @@ public class CashierPanel extends javax.swing.JFrame {
             if (addOrder != -1) {
                 orderDTO.setId(addOrder);
                 printBill(numOfItems, orderDTO);
-                JOptionPane.showMessageDialog(this, "Order Place Successfully.....");
+                JOptionPane.showMessageDialog(this, "Order Place Successfully.....\n Balance is = "+balanceLable.getText());
                 cancelOrder();
 
             }

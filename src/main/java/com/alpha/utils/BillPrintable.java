@@ -86,7 +86,7 @@ public class BillPrintable implements Printable {
                 g2d.drawString("---------------------------------------", 12, y);
                 y += headerRectHeight;
                 g2d.setFont(new Font("Monospaced", Font.BOLD, 9));
-                g2d.drawString(" Order ID : " + orderDTO.getId() + " ", 10, y);
+                g2d.drawString(" Order ID : " + orderDTO.getId() + "  "+orderDTO.getDate()+" "+orderDTO.getTime()+" ", 10, y);
                 y += yShift;
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
                 g2d.drawString("---------------------------------------", 10, y);
@@ -132,7 +132,7 @@ public class BillPrintable implements Printable {
                 y += yShift;
                 double tt = orderDTO.getSubTot();
                 String ttVal=tt+"0";
-                String totSpacesForSub = getTotSpaces(ttVal.length()+2);
+                String totSpacesForSub = getTotSpaces(ttVal.length()+3);
                 g2d.setFont(new Font("Monospaced", Font.BOLD, 10));
                 g2d.drawString("GROSS TOTAL:"+totSpacesForSub+tt+ "0 ", 10, y);
                 y += yShift;
@@ -144,10 +144,13 @@ public class BillPrintable implements Printable {
                 y += yShift;
                 g2d.drawString("             03111111111                ", 10, y);
                 y += yShift;
+                g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
                 g2d.drawString("***************************************", 10, y);
                 y += yShift;
+                g2d.setFont(new Font("Monospaced", Font.BOLD, 9));
                 g2d.drawString("      THANKS TO VISIT OUR STORE.        ", 10, y);
                 y += yShift;
+                g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
                 g2d.drawString("***************************************", 10, y);
                 y += yShift;
 
@@ -173,6 +176,7 @@ public class BillPrintable implements Printable {
                 case 9:return "               ";
                 case 10:return "             ";
                 case 11:return "            ";
+                case 12:return "           ";
                 default:return "";
             }
     }
