@@ -403,7 +403,7 @@ public class CashierPanel extends javax.swing.JFrame {
         jScrollPane5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         orderDetailsTable.setAutoCreateRowSorter(true);
-        orderDetailsTable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        orderDetailsTable.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         orderDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -465,7 +465,9 @@ public class CashierPanel extends javax.swing.JFrame {
             }
         });
 
+        orderQtyTxt.setForeground(new java.awt.Color(51, 51, 51));
         orderQtyTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        orderQtyTxt.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         orderQtyTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 orderQtyTxtKeyPressed(evt);
@@ -706,8 +708,8 @@ public class CashierPanel extends javax.swing.JFrame {
             .addGroup(backGroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(backGroundPanelLayout.createSequentialGroup()
                     .addGap(228, 228, 228)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(235, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(217, Short.MAX_VALUE)))
             .addGroup(backGroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backGroundPanelLayout.createSequentialGroup()
                     .addContainerGap(710, Short.MAX_VALUE)
