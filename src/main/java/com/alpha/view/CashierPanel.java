@@ -34,6 +34,18 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.Doc;
+import javax.print.DocFlavor;
+import javax.print.DocPrintJob;
+import javax.print.PrintException;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.SimpleDoc;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.HashPrintServiceAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.PrintServiceAttributeSet;
+import javax.print.attribute.standard.PrinterName;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -801,6 +813,9 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
+        }
 
     }//GEN-LAST:event_orderQtyTxtKeyPressed
 
@@ -908,6 +923,9 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
+        }
     }//GEN-LAST:event_cashierSearchResultComboKeyPressed
 
     private void cashierStoreDiscountTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierStoreDiscountTxtKeyPressed
@@ -936,6 +954,9 @@ public class CashierPanel extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierStoreDiscountTxtKeyPressed
 
@@ -966,6 +987,9 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
+        }
     }//GEN-LAST:event_cashierCompantyTxtKeyPressed
 
     private void orderDetailsTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_orderDetailsTableKeyPressed
@@ -988,6 +1012,9 @@ public class CashierPanel extends javax.swing.JFrame {
                 orderDetailsTable.setModel(m);
                 setGrossTotal();
             }
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
         }
 
     }//GEN-LAST:event_orderDetailsTableKeyPressed
@@ -1016,6 +1043,9 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
+        }
         if (m.getRowCount() != -1) {
             placeOrder();
         } else {
@@ -1026,6 +1056,9 @@ public class CashierPanel extends javax.swing.JFrame {
     private void cashierBarcodeTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierBarcodeTxtKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             orderDetailsTable.requestFocusInWindow();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
         }
         if (evt.getKeyCode() == KeyEvent.VK_END) {
             givenMoneyTxt.requestFocusInWindow();
@@ -1049,6 +1082,9 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
+        }
     }//GEN-LAST:event_cashierSearchByDescriptionTxtKeyPressed
 
     private void cashierDescriptionTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierDescriptionTxtKeyPressed
@@ -1062,6 +1098,9 @@ public class CashierPanel extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierDescriptionTxtKeyPressed
 
@@ -1077,6 +1116,9 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
+        }
     }//GEN-LAST:event_casherPackSizeKeyPressed
 
     private void cashierBatchNametxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierBatchNametxtKeyPressed
@@ -1090,6 +1132,9 @@ public class CashierPanel extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierBatchNametxtKeyPressed
 
@@ -1105,6 +1150,9 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
+        }
     }//GEN-LAST:event_batchIdTxtKeyPressed
 
     private void cashierItemIDTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierItemIDTxtKeyPressed
@@ -1118,6 +1166,9 @@ public class CashierPanel extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierItemIDTxtKeyPressed
 
@@ -1133,6 +1184,9 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
+        }
     }//GEN-LAST:event_cashierBatchExpDateTxtKeyPressed
 
     private void cashierBatchUnitPriceTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierBatchUnitPriceTxtKeyPressed
@@ -1147,6 +1201,9 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
+        }
     }//GEN-LAST:event_cashierBatchUnitPriceTxtKeyPressed
 
     private void cashierQtyOnHandTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierQtyOnHandTxtKeyPressed
@@ -1160,6 +1217,9 @@ public class CashierPanel extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierQtyOnHandTxtKeyPressed
 
@@ -1181,6 +1241,9 @@ public class CashierPanel extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "No Such Item In Cart..");
             }
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+           cashdrawerOpen();
         }
         if (evt.getKeyCode() == KeyEvent.VK_END) {
             givenMoneyTxt.requestFocusInWindow();
@@ -1785,9 +1848,12 @@ public class CashierPanel extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Order Place Successfully.....\n Balance is = "+balanceLable.getText());
                 cancelOrder();
 
+            }else{
+                JOptionPane.showMessageDialog(this, "Order Added Faild..");
             }
         } catch (Exception ex) {
             Logger.getLogger(CashierPanel.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex);
         }
 
     }
@@ -1813,5 +1879,26 @@ public class CashierPanel extends javax.swing.JFrame {
         cashierQtyOnHandTxt.setText("");
         batchIdTxt.setText("");
         cashierBarcodeTxt.requestFocusInWindow();
+    }
+    public void cashdrawerOpen() {
+
+        byte[] open = {27, 112, 48, 55, 121};
+        String printer = "EPSON TM-T82 Receipt";
+        PrintServiceAttributeSet printserviceattributeset = new HashPrintServiceAttributeSet();
+        printserviceattributeset.add(new PrinterName(printer, null));
+        PrintService[] printservice = PrintServiceLookup.lookupPrintServices(null, printserviceattributeset);
+        if (printservice.length != 1) {
+            JOptionPane.showMessageDialog(this, "Please Check Your Printer ON And Also Check Control Panel Default Printer");
+        }
+        PrintService pservice = printservice[0];
+        DocPrintJob job = pservice.createPrintJob();
+        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+        Doc doc = new SimpleDoc(open, flavor, null);
+        PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
+        try {
+            job.print(doc, aset);
+        } catch (PrintException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
     }
 }
