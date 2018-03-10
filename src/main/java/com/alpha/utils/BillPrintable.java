@@ -77,25 +77,25 @@ public class BillPrintable implements Printable {
                 Set<OrderDetails> all = orderDTO.getOrderDetails();
 
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
-                g2d.drawString("---------------------------------------", 12, y);
+                g2d.drawString("  ---------------------------------------", 12, y);
                 y += yShift;
                 g2d.setFont(new Font("Monospaced", Font.BOLD, 10));
-                g2d.drawString("         PRIYANKARA STORES            ", 12, y);
+                g2d.drawString("          PRIYANKARA STORES              ", 12, y);
                 y += yShift;
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
-                g2d.drawString("---------------------------------------", 12, y);
+                g2d.drawString("  ---------------------------------------", 12, y);
                 y += headerRectHeight;
                 g2d.setFont(new Font("Monospaced", Font.BOLD, 9));
-                g2d.drawString(" Order ID : " + orderDTO.getId() + "  "+orderDTO.getDate()+" "+orderDTO.getTime()+" ", 10, y);
+                g2d.drawString("   Order ID : " + orderDTO.getId() + "  "+orderDTO.getDate()+" "+orderDTO.getTime()+" ", 10, y);
                 y += yShift;
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
-                g2d.drawString("---------------------------------------", 10, y);
+                g2d.drawString("  ---------------------------------------", 10, y);
                 y += yShift;
                 g2d.setFont(new Font("Monospaced", Font.BOLD, 9));
-                g2d.drawString(" Description  Price  Qty  Dis  Amount  ", 10, y);
+                g2d.drawString("  Description  Price  Qty  Dis  Amount  ", 10, y);
                 y += yShift;
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
-                g2d.drawString("---------------------------------------", 10, y);
+                g2d.drawString("  ---------------------------------------", 10, y);
                 y += headerRectHeight;
                 g2d.setFont(new Font("Monospaced", Font.BOLD, 9));
                 for (OrderDetails o : all) {
@@ -105,53 +105,53 @@ public class BillPrintable implements Printable {
                     double u = o.getUnitPrice();
                     double q = o.getOrderOTY();
                     double a = (u * q) - r;
-                    g2d.drawString(" " + o.getDescription() + " ", 10, y);
+                    g2d.drawString("   " + o.getDescription() + " ", 10, y);
                     y += yShift;
-                    g2d.drawString("     (" + u + "0 * " + q + "0) - " + r + "0 = " + a + "0 ", 10, y);
+                    g2d.drawString("      (" + u + "0 * " + q + "0) - " + r + "0 = " + a + "0 ", 10, y);
                     y += yShift;
                 }
                 double total = orderDTO.getTotal();
                 String t = total + "";
 
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
-                g2d.drawString("-------------------------------------", 10, y);
+                g2d.drawString("  -------------------------------------", 10, y);
                 y += yShift;
                 double total1 = orderDTO.getTotal();
                 String tttVal=total1+"0";
                 String totSpaces = getTotSpaces(tttVal.length());
                 g2d.setFont(new Font("Monospaced", Font.BOLD, 9));
-                g2d.drawString(" SUB TOTAL  :"+totSpaces+total1+"0 ", 10, y);
+                g2d.drawString("   SUB TOTAL  :"+totSpaces+total1+"0 ", 10, y);
                 y += yShift;
                 double dd = orderDTO.getDiscounts();
                 String ddVal=dd+"0";
                 String totSpacesForDis = getTotSpaces(ddVal.length());
-                g2d.drawString(" DISCOUNTS  :"+totSpacesForDis+dd+ "0 ", 10, y);
+                g2d.drawString("   DISCOUNTS  :"+totSpacesForDis+dd+ "0 ", 10, y);
                 y += yShift;
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
-                g2d.drawString("---------------------------------------", 10, y);
+                g2d.drawString("  ---------------------------------------", 10, y);
                 y += yShift;
                 double tt = orderDTO.getSubTot();
                 String ttVal=tt+"0";
                 String totSpacesForSub = getTotSpaces(ttVal.length()+3);
                 g2d.setFont(new Font("Monospaced", Font.BOLD, 10));
-                g2d.drawString("GROSS TOTAL:"+totSpacesForSub+tt+ "0 ", 10, y);
+                g2d.drawString("  GROSS TOTAL:"+totSpacesForSub+tt+ "0 ", 10, y);
                 y += yShift;
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
-                g2d.drawString("---------------------------------------", 10, y);
+                g2d.drawString("  ---------------------------------------", 10, y);
                 y += yShift;
                 g2d.setFont(new Font("Monospaced", Font.BOLD, 9));
-                g2d.drawString("          Free Home Delivery            ", 10, y);
+                g2d.drawString("                Contact Us                 ", 10, y);
                 y += yShift;
-                g2d.drawString("             03111111111                ", 10, y);
+                g2d.drawString("         0713434180 / 0774205874          ", 10, y);
                 y += yShift;
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
-                g2d.drawString("***************************************", 10, y);
+                g2d.drawString("  ***************************************", 10, y);
                 y += yShift;
                 g2d.setFont(new Font("Monospaced", Font.BOLD, 9));
-                g2d.drawString("      THANKS TO VISIT OUR STORE.        ", 10, y);
+                g2d.drawString("       THANKS TO VISIT OUR STORE.        ", 10, y);
                 y += yShift;
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
-                g2d.drawString("***************************************", 10, y);
+                g2d.drawString("  ***************************************", 10, y);
                 y += yShift;
 
 //            g2d.setFont(new Font("Monospaced",Font.BOLD,10));
@@ -168,15 +168,15 @@ public class BillPrintable implements Printable {
 
     private String getTotSpaces(int length) {
         switch(length){
-                case 4:return "                    ";
-                case 5:return "                   ";
-                case 6:return "                  ";
-                case 7:return "                 ";
-                case 8:return "                ";
-                case 9:return "               ";
-                case 10:return "             ";
-                case 11:return "            ";
-                case 12:return "           ";
+                case 4:return "                   ";
+                case 5:return "                  ";
+                case 6:return "                 ";
+                case 7:return "                ";
+                case 8:return "               ";
+                case 9:return "              ";
+                case 10:return "            ";
+                case 11:return "           ";
+                case 12:return "          ";
                 default:return "";
             }
     }
