@@ -283,6 +283,7 @@ public class Welcome extends javax.swing.JFrame {
                             dispose();
                         } else if (userType.equalsIgnoreCase("Cashier")) {
                             CashierPanel c = new CashierPanel();
+                            c.setCashierID(authentication.getId());
                             c.setExtendedState(MAXIMIZED_BOTH);
                             c.setVisible(true);
                             dispose();
