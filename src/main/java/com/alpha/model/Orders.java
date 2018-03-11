@@ -37,7 +37,7 @@ public class Orders {
     private double subTot;
     private double discounts;
     @Transient
-    @OneToMany(mappedBy = "Orders", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "Orders", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
         
     public int getId() {
