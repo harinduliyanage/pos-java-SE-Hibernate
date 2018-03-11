@@ -86,7 +86,7 @@ public class BillPrintable implements Printable {
                 g2d.drawString("  ---------------------------------------", 12, y);
                 y += headerRectHeight;
                 g2d.setFont(new Font("Monospaced", Font.BOLD, 9));
-                g2d.drawString("   Order ID : " + orderDTO.getId() + "  "+orderDTO.getDate()+" "+orderDTO.getTime()+" ", 10, y);
+                g2d.drawString("   Order ID : " + orderDTO.getId() + "  ", 10, y);
                 y += yShift;
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
                 g2d.drawString("  ---------------------------------------", 10, y);
@@ -135,6 +135,12 @@ public class BillPrintable implements Printable {
                 String totSpacesForSub = getTotSpaces(ttVal.length()+3);
                 g2d.setFont(new Font("Monospaced", Font.BOLD, 10));
                 g2d.drawString("  GROSS TOTAL:"+totSpacesForSub+tt+ "0 ", 10, y);
+                y += yShift;
+                g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
+                g2d.drawString("  ---------------------------------------", 10, y);
+                y += yShift;
+                g2d.setFont(new Font("Monospaced", Font.BOLD, 9));
+                g2d.drawString("           "+orderDTO.getDate()+"  "+orderDTO.getTime().replace("-", ":") , 10, y);
                 y += yShift;
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
                 g2d.drawString("  ---------------------------------------", 10, y);
