@@ -30,7 +30,7 @@ public class OrderDetails implements Serializable {
     @Column(name = "ORDER_DETAILS_ID")
     private int id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID", nullable = false)
     private Orders orders;
     @ManyToOne(cascade = CascadeType.PERSIST, optional = true, fetch = FetchType.LAZY)
