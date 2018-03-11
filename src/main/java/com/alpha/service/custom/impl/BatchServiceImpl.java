@@ -6,8 +6,11 @@
 package com.alpha.service.custom.impl;
 
 import com.alpha.dao.custom.BatchDAO;
+import com.alpha.dao.custom.ItemDAO;
 import com.alpha.dto.BatchDTO;
+import com.alpha.dto.ReOrderLevelItemDTO;
 import com.alpha.model.Batch;
+import com.alpha.model.Item;
 import com.alpha.service.custom.BatchService;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,9 @@ public class BatchServiceImpl implements BatchService {
 
     @Autowired
     BatchDAO batchDAO;
+
+    @Autowired
+    ItemDAO itemDAO;
 
     @Override
     public BatchDTO getBatchByBatchName(String batch) throws Exception {
@@ -124,6 +130,42 @@ public class BatchServiceImpl implements BatchService {
             b.setUnitPrice(t.getUnitPrice());
             return b;
         }
+    }
+
+    @Override
+    public List<ReOrderLevelItemDTO> getReOrderLevelItems() throws Exception {
+        List<Item> all = itemDAO.getAll();
+        List<ReOrderLevelItemDTO> allReOrder = new ArrayList();
+        if (all != null) {
+            for (Item i : all) {
+                int count=0;
+                int reOrderLevel = i.getReOrderLevel();
+                double doubleReOrderLevel = Double.parseDouble(reOrderLevel + "");
+                double qtyOfallBathc = 0.00;
+                ReOrderLevelItemDTO r = new ReOrderLevelItemDTO();
+
+                List<Batch> allBatch = itemDAO.getItemsBatchesById(i.getId());
+                if (allBatch != null) {
+                    for (Batch b : allBatch) {
+                        double qtyOnHand = b.getQtyOnHand();
+                        if (qtyOnHand>0) {
+                            count++;
+                        }
+                        qtyOfallBathc = qtyOfallBathc + qtyOnHand;
+                    }
+                }
+                if(doubleReOrderLevel>=qtyOfallBathc){
+                    r.setItemId(i.getId());
+                    r.setDescription(i.getDescription());
+                    r.setPackSize(i.getPackSize());
+                    r.setAvailabelBatchQty(count);
+                    r.setStockQty(qtyOfallBathc);
+                    r.setReorderLevel(i.getReOrderLevel());
+                    allReOrder.add(r);
+                }
+            }
+        }
+        return allReOrder;
     }
 
 }

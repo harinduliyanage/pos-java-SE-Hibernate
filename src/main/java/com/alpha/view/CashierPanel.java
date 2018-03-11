@@ -791,12 +791,17 @@ public class CashierPanel extends javax.swing.JFrame {
             String val = orderQtyTxt.getText();
             String val2 = cashierQtyOnHandTxt.getText();
             if (!Validation.validateEmptyTextFeald(val2) && !Validation.validateEmptyTextFeald(val)) {
-                double orderQty = Double.parseDouble(val);
-                double availbleQty = Double.parseDouble(val2);
-                if (orderQty <= availbleQty) {
-                    btn_put_To_Cart.doClick();
+                boolean matches = val.matches("[0-9]+(\\.[0-9][0-9]?)?");
+                if (matches) {
+                    double orderQty = Double.parseDouble(val);
+                    double availbleQty = Double.parseDouble(val2);
+                    if (orderQty <= availbleQty) {
+                        btn_put_To_Cart.doClick();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "This Item Have Only '" + availbleQty + "' Qty In Stock...", "Warning No Such A Order Qty in Stock", JOptionPane.WARNING_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, "This Item Have Only '" + availbleQty + "' Qty In Stock...", "Warning No Such A Order Qty in Stock", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Accept only Numbers");
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Search Item and Add buying Qty..");
@@ -814,7 +819,7 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
 
     }//GEN-LAST:event_orderQtyTxtKeyPressed
@@ -924,7 +929,7 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierSearchResultComboKeyPressed
 
@@ -933,12 +938,17 @@ public class CashierPanel extends javax.swing.JFrame {
             String val = orderQtyTxt.getText();
             String val2 = cashierQtyOnHandTxt.getText();
             if (!Validation.validateEmptyTextFeald(val2) && !Validation.validateEmptyTextFeald(val)) {
-                double orderQty = Double.parseDouble(val);
-                double availbleQty = Double.parseDouble(val2);
-                if (orderQty <= availbleQty) {
-                    btn_put_To_Cart.doClick();
+                boolean matches = val.matches("[0-9]+(\\.[0-9][0-9]?)?");
+                if (matches) {
+                    double orderQty = Double.parseDouble(val);
+                    double availbleQty = Double.parseDouble(val2);
+                    if (orderQty <= availbleQty) {
+                        btn_put_To_Cart.doClick();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "This Item Have Only '" + availbleQty + "' Qty In Stock...", "Warning No Such A Order Qty in Stock", JOptionPane.WARNING_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, "This Item Have Only '" + availbleQty + "' Qty In Stock...", "Warning No Such A Order Qty in Stock", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Accept only Numbers");
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Search Item and Add buying Qty..");
@@ -956,7 +966,7 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierStoreDiscountTxtKeyPressed
 
@@ -965,12 +975,17 @@ public class CashierPanel extends javax.swing.JFrame {
             String val = orderQtyTxt.getText();
             String val2 = cashierQtyOnHandTxt.getText();
             if (!Validation.validateEmptyTextFeald(val2) && !Validation.validateEmptyTextFeald(val)) {
-                double orderQty = Double.parseDouble(val);
-                double availbleQty = Double.parseDouble(val2);
-                if (orderQty <= availbleQty) {
-                    btn_put_To_Cart.doClick();
+                boolean matches = val.matches("[0-9]+(\\.[0-9][0-9]?)?");
+                if (matches) {
+                    double orderQty = Double.parseDouble(val);
+                    double availbleQty = Double.parseDouble(val2);
+                    if (orderQty <= availbleQty) {
+                        btn_put_To_Cart.doClick();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "This Item Have Only '" + availbleQty + "' Qty In Stock...", "Warning No Such A Order Qty in Stock", JOptionPane.WARNING_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, "This Item Have Only '" + availbleQty + "' Qty In Stock...", "Warning No Such A Order Qty in Stock", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Accept only Numbers");
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Search Item and Add buying Qty..");
@@ -988,7 +1003,7 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierCompantyTxtKeyPressed
 
@@ -1014,7 +1029,7 @@ public class CashierPanel extends javax.swing.JFrame {
             }
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
 
     }//GEN-LAST:event_orderDetailsTableKeyPressed
@@ -1044,7 +1059,7 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
         if (m.getRowCount() != -1) {
             placeOrder();
@@ -1058,7 +1073,7 @@ public class CashierPanel extends javax.swing.JFrame {
             orderDetailsTable.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
         if (evt.getKeyCode() == KeyEvent.VK_END) {
             givenMoneyTxt.requestFocusInWindow();
@@ -1083,7 +1098,7 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierSearchByDescriptionTxtKeyPressed
 
@@ -1100,7 +1115,7 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierDescriptionTxtKeyPressed
 
@@ -1117,7 +1132,7 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
     }//GEN-LAST:event_casherPackSizeKeyPressed
 
@@ -1134,7 +1149,7 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierBatchNametxtKeyPressed
 
@@ -1151,7 +1166,7 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
     }//GEN-LAST:event_batchIdTxtKeyPressed
 
@@ -1168,7 +1183,7 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierItemIDTxtKeyPressed
 
@@ -1185,7 +1200,7 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierBatchExpDateTxtKeyPressed
 
@@ -1202,7 +1217,7 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierBatchUnitPriceTxtKeyPressed
 
@@ -1219,7 +1234,7 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
     }//GEN-LAST:event_cashierQtyOnHandTxtKeyPressed
 
@@ -1243,7 +1258,7 @@ public class CashierPanel extends javax.swing.JFrame {
             }
         }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
-           cashdrawerOpen();
+            cashdrawerOpen();
         }
         if (evt.getKeyCode() == KeyEvent.VK_END) {
             givenMoneyTxt.requestFocusInWindow();
@@ -1678,7 +1693,7 @@ public class CashierPanel extends javax.swing.JFrame {
 
         double middleHeight = middle;
         double headerHeight = 1.0;
-        double footerHeight = 2.0;
+        double footerHeight = 3.0;
         double width = convert_CM_To_PPI(8);      //printer know only point per inch.default value is 72ppi
         double height = convert_CM_To_PPI(headerHeight + middleHeight + footerHeight);
         paper.setSize(width, height);
@@ -1761,14 +1776,17 @@ public class CashierPanel extends javax.swing.JFrame {
 
         } else {
             String v1 = givenMoneyTxt.getText();
-            boolean value = Validation.validateEmptyTextFeald(v1);
-            if (!value) {
-                double grossTot = Double.parseDouble(gross);
-                double givenMoney = Double.parseDouble(v1);
-                double balance = givenMoney - grossTot;
-                balanceLable.setText(balance + "0");
-            } else {
-                balanceLable.setText("0.00");
+            boolean matches = v1.matches("[0-9]+(\\.[0-9][0-9]?)?");
+            if (matches) {
+                boolean value = Validation.validateEmptyTextFeald(v1);
+                if (!value) {
+                    double grossTot = Double.parseDouble(gross);
+                    double givenMoney = Double.parseDouble(v1);
+                    double balance = givenMoney - grossTot;
+                    balanceLable.setText(balance + "0");
+                } else {
+                    balanceLable.setText("0.00");
+                }
             }
         }
     }
@@ -1845,10 +1863,10 @@ public class CashierPanel extends javax.swing.JFrame {
             if (addOrder != -1) {
                 orderDTO.setId(addOrder);
                 printBill(numOfItems, orderDTO);
-                JOptionPane.showMessageDialog(this, "Order Place Successfully.....\n Balance is = "+balanceLable.getText());
+                JOptionPane.showMessageDialog(this, "Order Place Successfully.....\n Balance is = " + balanceLable.getText());
                 cancelOrder();
 
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Order Added Faild..");
             }
         } catch (Exception ex) {
@@ -1880,6 +1898,7 @@ public class CashierPanel extends javax.swing.JFrame {
         batchIdTxt.setText("");
         cashierBarcodeTxt.requestFocusInWindow();
     }
+
     public void cashdrawerOpen() {
 
         byte[] open = {27, 112, 48, 55, 121};

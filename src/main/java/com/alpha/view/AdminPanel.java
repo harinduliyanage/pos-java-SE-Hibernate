@@ -10,6 +10,7 @@ import com.alpha.dto.BatchDTO;
 import com.alpha.dto.GrnDTO;
 import com.alpha.dto.GrnDetailsDTO;
 import com.alpha.dto.ItemDTO;
+import com.alpha.dto.ReOrderLevelItemDTO;
 import com.alpha.dto.UserDTO;
 import com.alpha.model.Batch;
 import com.alpha.model.Item;
@@ -25,6 +26,7 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -47,6 +50,8 @@ import org.joda.time.LocalDate;
 import org.springframework.context.support.AbstractApplicationContext;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 /**
  *
@@ -57,6 +62,8 @@ public class AdminPanel extends javax.swing.JFrame {
     /**
      * Creates new form Sign_In_Form
      */
+    @Autowired
+    private Environment environment;
     Timer simpleTimer;
     private AbstractApplicationContext context;
     private DefaultListModel listModelForBatch;
@@ -65,6 +72,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private DefaultListModel listModel3;
     private DefaultComboBoxModel searchCombModel;
     private DefaultTableCellRenderer centerRenderer;
+    private String path;
 
     public AdminPanel() {
         initComponents();
@@ -75,6 +83,7 @@ public class AdminPanel extends javax.swing.JFrame {
         this.listModel2 = new DefaultListModel();
         this.listModel3 = new DefaultListModel();
         this.centerRenderer = new DefaultTableCellRenderer();
+        this.path = "";
 
         validDateFomatLable1.hide();
         validDateFormatLable2.hide();
@@ -94,6 +103,7 @@ public class AdminPanel extends javax.swing.JFrame {
         DateLable.setText(dateFormat.format(date));
         setDocumetListner();
         setTodayTranstction();
+        setReOrderLevelItems();
 
     }
 
@@ -125,6 +135,8 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         btn_Returns = new javax.swing.JPanel();
         jLabel92 = new javax.swing.JLabel();
+        btn_BackUpPanel = new javax.swing.JPanel();
+        jLabel109 = new javax.swing.JLabel();
         headerPanel = new javax.swing.JPanel();
         navigationLable = new javax.swing.JLabel();
         todayTransactioLable = new javax.swing.JLabel();
@@ -342,6 +354,8 @@ public class AdminPanel extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         ViewReportsPane = new javax.swing.JPanel();
         viewReOrderLevelPanel = new javax.swing.JPanel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        reOrderLevelTable = new javax.swing.JTable();
         viewGRNPanel = new javax.swing.JPanel();
         jLabel90 = new javax.swing.JLabel();
         jLabel91 = new javax.swing.JLabel();
@@ -382,6 +396,21 @@ public class AdminPanel extends javax.swing.JFrame {
         suplierNameTxt = new javax.swing.JTextField();
         onGRNAddingQtyTxt = new javax.swing.JFormattedTextField();
         ViewReturnPanel = new javax.swing.JPanel();
+        jLabel108 = new javax.swing.JLabel();
+        BackUpsPanel = new javax.swing.JPanel();
+        jPanel11112 = new javax.swing.JPanel();
+        pathTxt = new javax.swing.JTextField();
+        jLabel110 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        jSeparator6 = new javax.swing.JSeparator();
+        jLabel111 = new javax.swing.JLabel();
+        jLabel112 = new javax.swing.JLabel();
+        selectedBackUpFilePathTxt = new javax.swing.JTextField();
+        jLabel113 = new javax.swing.JLabel();
+        btn_restore = new javax.swing.JButton();
+        btnBrows2 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -515,6 +544,22 @@ public class AdminPanel extends javax.swing.JFrame {
         btn_Returns.add(jLabel92, java.awt.BorderLayout.CENTER);
 
         sidePanel.add(btn_Returns, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 240, 50));
+
+        btn_BackUpPanel.setBackground(new java.awt.Color(51, 51, 51));
+        btn_BackUpPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_BackUpPanelMousePressed(evt);
+            }
+        });
+        btn_BackUpPanel.setLayout(new java.awt.BorderLayout());
+
+        jLabel109.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel109.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel109.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Entypo_e754(0)_48.png"))); // NOI18N
+        jLabel109.setText("   Data Back Up");
+        btn_BackUpPanel.add(jLabel109, java.awt.BorderLayout.CENTER);
+
+        sidePanel.add(btn_BackUpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 240, 50));
 
         background.add(sidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 770));
 
@@ -728,7 +773,7 @@ public class AdminPanel extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel7.setText("____Add New Item____");
+        jLabel7.setText("        Add New Item");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(51, 51, 51));
@@ -2536,15 +2581,84 @@ public class AdminPanel extends javax.swing.JFrame {
 
         viewReOrderLevelPanel.setBackground(new java.awt.Color(255, 255, 255));
 
+        jScrollPane11.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        reOrderLevelTable.setAutoCreateRowSorter(true);
+        reOrderLevelTable.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        reOrderLevelTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Item ID", "Description", "Pack Size", "Available Batch Count", "Re-Order Level", "Available Qty In Stock"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        reOrderLevelTable.setGridColor(new java.awt.Color(255, 255, 255));
+        reOrderLevelTable.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        reOrderLevelTable.setRowHeight(28);
+        reOrderLevelTable.setSelectionBackground(new java.awt.Color(153, 153, 153));
+        jScrollPane11.setViewportView(reOrderLevelTable);
+        if (reOrderLevelTable.getColumnModel().getColumnCount() > 0) {
+            reOrderLevelTable.getColumnModel().getColumn(0).setResizable(false);
+            reOrderLevelTable.getColumnModel().getColumn(1).setResizable(false);
+            reOrderLevelTable.getColumnModel().getColumn(2).setResizable(false);
+            reOrderLevelTable.getColumnModel().getColumn(3).setResizable(false);
+            reOrderLevelTable.getColumnModel().getColumn(4).setResizable(false);
+            reOrderLevelTable.getColumnModel().getColumn(5).setResizable(false);
+        }
+
         javax.swing.GroupLayout viewReOrderLevelPanelLayout = new javax.swing.GroupLayout(viewReOrderLevelPanel);
         viewReOrderLevelPanel.setLayout(viewReOrderLevelPanelLayout);
         viewReOrderLevelPanelLayout.setHorizontalGroup(
             viewReOrderLevelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1130, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewReOrderLevelPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 1138, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         viewReOrderLevelPanelLayout.setVerticalGroup(
             viewReOrderLevelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 614, Short.MAX_VALUE)
+            .addGroup(viewReOrderLevelPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         viewPanel.add(viewReOrderLevelPanel, "card2");
@@ -2720,6 +2834,11 @@ public class AdminPanel extends javax.swing.JFrame {
                 jButton12ActionPerformed(evt);
             }
         });
+        jButton12.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton12KeyPressed(evt);
+            }
+        });
 
         jButton13.setBackground(new java.awt.Color(51, 51, 51));
         jButton13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -2763,6 +2882,11 @@ public class AdminPanel extends javax.swing.JFrame {
 
         onGRNAddingQtyTxt.setEditable(false);
         onGRNAddingQtyTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0.00"))));
+        onGRNAddingQtyTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                onGRNAddingQtyTxtKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout viewGRNPanelLayout = new javax.swing.GroupLayout(viewGRNPanel);
         viewGRNPanel.setLayout(viewGRNPanelLayout);
@@ -2924,18 +3048,184 @@ public class AdminPanel extends javax.swing.JFrame {
 
         ViewReturnPanel.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel108.setText("Search By Barcode");
+
         javax.swing.GroupLayout ViewReturnPanelLayout = new javax.swing.GroupLayout(ViewReturnPanel);
         ViewReturnPanel.setLayout(ViewReturnPanelLayout);
         ViewReturnPanelLayout.setHorizontalGroup(
             ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1130, Short.MAX_VALUE)
+            .addGroup(ViewReturnPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel108)
+                .addContainerGap(1030, Short.MAX_VALUE))
         );
         ViewReturnPanelLayout.setVerticalGroup(
             ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 614, Short.MAX_VALUE)
+            .addGroup(ViewReturnPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel108)
+                .addContainerGap(585, Short.MAX_VALUE))
         );
 
         viewPanel.add(ViewReturnPanel, "card2");
+
+        BackUpsPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel11112.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel11112.setForeground(new java.awt.Color(51, 51, 51));
+
+        pathTxt.setEditable(false);
+        pathTxt.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel110.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel110.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel110.setText("Path");
+
+        jButton11.setBackground(new java.awt.Color(51, 51, 51));
+        jButton11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton11.setForeground(new java.awt.Color(255, 255, 255));
+        jButton11.setText("Brows");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        jButton16.setBackground(new java.awt.Color(51, 51, 51));
+        jButton16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton16.setForeground(new java.awt.Color(255, 255, 255));
+        jButton16.setText("Back Up Now");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+
+        jButton17.setBackground(new java.awt.Color(51, 51, 51));
+        jButton17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton17.setForeground(new java.awt.Color(255, 255, 255));
+        jButton17.setText("Static Path");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
+
+        jSeparator6.setForeground(new java.awt.Color(51, 51, 51));
+
+        jLabel111.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel111.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel111.setText("Back Up");
+
+        jLabel112.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel112.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel112.setText("Restore Back Up");
+
+        selectedBackUpFilePathTxt.setEditable(false);
+        selectedBackUpFilePathTxt.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel113.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel113.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel113.setText("Select Back up File");
+
+        btn_restore.setBackground(new java.awt.Color(51, 51, 51));
+        btn_restore.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_restore.setForeground(new java.awt.Color(255, 255, 255));
+        btn_restore.setText("Restore");
+        btn_restore.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_restoreActionPerformed(evt);
+            }
+        });
+
+        btnBrows2.setBackground(new java.awt.Color(51, 51, 51));
+        btnBrows2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnBrows2.setForeground(new java.awt.Color(255, 255, 255));
+        btnBrows2.setText("Brows");
+        btnBrows2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBrows2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11112Layout = new javax.swing.GroupLayout(jPanel11112);
+        jPanel11112.setLayout(jPanel11112Layout);
+        jPanel11112Layout.setHorizontalGroup(
+            jPanel11112Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11112Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel110, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addGroup(jPanel11112Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pathTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel11112Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
+                .addGap(69, 69, 69))
+            .addComponent(jSeparator6)
+            .addGroup(jPanel11112Layout.createSequentialGroup()
+                .addGroup(jPanel11112Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11112Layout.createSequentialGroup()
+                        .addGap(513, 513, 513)
+                        .addComponent(jLabel111, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel11112Layout.createSequentialGroup()
+                        .addGap(483, 483, 483)
+                        .addComponent(jLabel112)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11112Layout.createSequentialGroup()
+                .addContainerGap(126, Short.MAX_VALUE)
+                .addComponent(jLabel113, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(jPanel11112Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11112Layout.createSequentialGroup()
+                        .addComponent(selectedBackUpFilePathTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBrows2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_restore, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(126, Short.MAX_VALUE))
+        );
+        jPanel11112Layout.setVerticalGroup(
+            jPanel11112Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11112Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel111)
+                .addGap(55, 55, 55)
+                .addGroup(jPanel11112Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel110, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pathTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel11112Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel112)
+                .addGap(54, 54, 54)
+                .addGroup(jPanel11112Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(selectedBackUpFilePathTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jLabel113)
+                    .addComponent(btnBrows2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_restore, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addGap(214, 214, 214))
+        );
+
+        javax.swing.GroupLayout BackUpsPanelLayout = new javax.swing.GroupLayout(BackUpsPanel);
+        BackUpsPanel.setLayout(BackUpsPanelLayout);
+        BackUpsPanelLayout.setHorizontalGroup(
+            BackUpsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel11112, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        BackUpsPanelLayout.setVerticalGroup(
+            BackUpsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel11112, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        viewPanel.add(BackUpsPanel, "card2");
 
         background.add(viewPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 1130, 610));
 
@@ -2969,6 +3259,7 @@ public class AdminPanel extends javax.swing.JFrame {
         resetColour(btn_Item);
         resetColour(btn_Returns);
         resetColour(btn_GRN);
+        resetColour(btn_BackUpPanel);
         resetColour(btn_ReorderLevel);
         resetColour(btn_Reports);
         navigationLable.setText("Admin/Home");
@@ -2988,6 +3279,7 @@ public class AdminPanel extends javax.swing.JFrame {
         resetColour(btn_Home);
         resetColour(btn_GRN);
         resetColour(btn_Returns);
+        resetColour(btn_BackUpPanel);
         resetColour(btn_Item);
         resetColour(btn_ReorderLevel);
         resetColour(btn_Reports);
@@ -3021,6 +3313,7 @@ public class AdminPanel extends javax.swing.JFrame {
         resetColour(btn_Home);
         resetColour(btn_Returns);
         resetColour(btn_GRN);
+        resetColour(btn_BackUpPanel);
         resetColour(btn_Accounts);
         resetColour(btn_ReorderLevel);
         resetColour(btn_Reports);
@@ -3043,10 +3336,12 @@ public class AdminPanel extends javax.swing.JFrame {
         resetColour(btn_Returns);
         resetColour(btn_Home);
         resetColour(btn_GRN);
+        resetColour(btn_BackUpPanel);
         resetColour(btn_Accounts);
         resetColour(btn_ReorderLevel);
         resetColour(btn_Item);
         navigationLable.setText("Admin/Report");
+        todayTransactioLable.setText("");
         //RemoveAll on Panel and repaint 
         viewPanel.removeAll();
         viewPanel.repaint();
@@ -3062,10 +3357,12 @@ public class AdminPanel extends javax.swing.JFrame {
         resetColour(btn_Home);
         resetColour(btn_GRN);
         resetColour(btn_Returns);
+        resetColour(btn_BackUpPanel);
         resetColour(btn_Accounts);
         resetColour(btn_Reports);
         resetColour(btn_Item);
         navigationLable.setText("Admin/Re-Order Level");
+        todayTransactioLable.setText("");
         //RemoveAll on Panel and repaint 
         viewPanel.removeAll();
         viewPanel.repaint();
@@ -3078,6 +3375,7 @@ public class AdminPanel extends javax.swing.JFrame {
 
     private void btnAddNewBatchForItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddNewBatchForItem1MousePressed
         navigationLable.setText("Admin/Item/New Batch");
+        todayTransactioLable.setText("");
         //RemoveAll on Panel and repaint 
         viewPanel.removeAll();
         viewPanel.repaint();
@@ -3111,7 +3409,7 @@ public class AdminPanel extends javax.swing.JFrame {
 
     private void btnAddNewItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddNewItem1MousePressed
         navigationLable.setText("Admin/Item/New Item");
-
+        todayTransactioLable.setText("");
         //RemoveAll on Panel and repaint 
         viewPanel.removeAll();
         viewPanel.repaint();
@@ -3196,92 +3494,96 @@ public class AdminPanel extends javax.swing.JFrame {
         boolean v8 = Validation.validateEmptyTextFeald(qty);
         boolean v9 = Validation.validateEmptyTextFeald(unitPrice);
 
-        if (!v2 && !v3 && !v4 && !v5 && !v6 && !v7 && !v8 && !v9) {
-            ItemService itemService = (ItemService) context.getBean("ItemService");
-            try {
-                Item searchItemIsAlreadyExits = itemService.getItemByDescription(description.trim());
-                Item searchItemAlreadyExitsByBarcode = itemService.getItemByBarcode(barcode.trim());
-                if (searchItemAlreadyExitsByBarcode == null) {
-                    if (searchItemIsAlreadyExits == null) {
-                        //Create ITEM
-                        ItemDTO i = new ItemDTO();
-                        i.setBarcode(barcode);
-                        i.setDescription(description);
-                        i.setPackSize(packSize);
-                        i.setReOrderLevel(Integer.parseInt(reOrderLevel));
-                        //Create Batch
-                        LocalDate MFD = new LocalDate(MFDtxt);
-                        LocalDate EXP = new LocalDate(EXPtxt);
+        if (description.trim().length() < 34) {
+            if (!v2 && !v3 && !v4 && !v5 && !v6 && !v7 && !v8 && !v9) {
+                ItemService itemService = (ItemService) context.getBean("ItemService");
+                try {
+                    Item searchItemIsAlreadyExits = itemService.getItemByDescription(description.trim());
+                    Item searchItemAlreadyExitsByBarcode = itemService.getItemByBarcode(barcode.trim());
+                    if (searchItemAlreadyExitsByBarcode == null) {
+                        if (searchItemIsAlreadyExits == null) {
+                            //Create ITEM
+                            ItemDTO i = new ItemDTO();
+                            i.setBarcode(barcode);
+                            i.setDescription(description);
+                            i.setPackSize(packSize);
+                            i.setReOrderLevel(Integer.parseInt(reOrderLevel));
+                            //Create Batch
+                            LocalDate MFD = new LocalDate(MFDtxt);
+                            LocalDate EXP = new LocalDate(EXPtxt);
 
-                        Batch batchDto = new Batch();
-                        batchDto.setBatch(batch);
-                        batchDto.setEXPD(EXP);
-                        batchDto.setMFD(MFD);
-                        batchDto.setQtyOnHand(Double.parseDouble(qty));
-                        batchDto.setUnitPrice(Double.parseDouble(unitPrice));
+                            Batch batchDto = new Batch();
+                            batchDto.setBatch(batch);
+                            batchDto.setEXPD(EXP);
+                            batchDto.setMFD(MFD);
+                            batchDto.setQtyOnHand(Double.parseDouble(qty));
+                            batchDto.setUnitPrice(Double.parseDouble(unitPrice));
 
-                        try {
-                            boolean add = itemService.add(i);
-                            if (add) {
-                                Item itemByDescription = itemService.getItemByDescription(description);
-                                int searchedId = itemByDescription.getId();
-                                List<Batch> allBatch = itemService.getItemsBatchesById(searchedId);
-                                if (allBatch == null) {
-                                    allBatch = new ArrayList<>();
+                            try {
+                                boolean add = itemService.add(i);
+                                if (add) {
+                                    Item itemByDescription = itemService.getItemByDescription(description);
+                                    int searchedId = itemByDescription.getId();
+                                    List<Batch> allBatch = itemService.getItemsBatchesById(searchedId);
+                                    if (allBatch == null) {
+                                        allBatch = new ArrayList<>();
+                                    }
+                                    allBatch.add(batchDto);
+                                    itemByDescription.setBatch(allBatch);
+                                    //item for batch added then update item
+                                    ItemDTO itemDTO1 = new ItemDTO();
+                                    itemDTO1.setBarcode(itemByDescription.getBarcode());
+                                    itemDTO1.setBatch(itemByDescription.getBatch());
+                                    itemDTO1.setDescription(itemByDescription.getDescription());
+                                    itemDTO1.setId(itemByDescription.getId());
+                                    itemDTO1.setPackSize(itemByDescription.getPackSize());
+                                    itemDTO1.setReOrderLevel(itemByDescription.getReOrderLevel());
+                                    boolean update = itemService.update(itemDTO1);
+                                    if (update) {
+                                        JOptionPane.showMessageDialog(this, "Item Added Successfully..");
+                                        addItembarcodeTxt.setText("");
+                                        addItemdescriptionTxt.setText("");
+                                        addItempackSizeTxt.setText("");
+                                        addItemreOrderLevelTxt.setText("");
+                                        addItemBatchTxt.setText("");
+                                        addItemEXPDateTxt.setText("");
+                                        addItemMFDTxt.setText("");
+                                        addItemQtyOnHandTxt.setText("");
+                                        addItemUnitPriceTxt.setText("");
+                                        addItembarcodeTxt.setRequestFocusEnabled(true);
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "Item Added Faild..");
+                                        addItembarcodeTxt.setText("");
+                                        addItemdescriptionTxt.setText("");
+                                        addItempackSizeTxt.setText("");
+                                        addItemreOrderLevelTxt.setText("");
+                                        addItemBatchTxt.setText("");
+                                        addItemEXPDateTxt.setText("");
+                                        addItemMFDTxt.setText("");
+                                        addItemQtyOnHandTxt.setText("");
+                                        addItemUnitPriceTxt.setText("");
+                                        addItembarcodeTxt.setRequestFocusEnabled(true);
+                                    }
                                 }
-                                allBatch.add(batchDto);
-                                itemByDescription.setBatch(allBatch);
-                                //item for batch added then update item
-                                ItemDTO itemDTO1 = new ItemDTO();
-                                itemDTO1.setBarcode(itemByDescription.getBarcode());
-                                itemDTO1.setBatch(itemByDescription.getBatch());
-                                itemDTO1.setDescription(itemByDescription.getDescription());
-                                itemDTO1.setId(itemByDescription.getId());
-                                itemDTO1.setPackSize(itemByDescription.getPackSize());
-                                itemDTO1.setReOrderLevel(itemByDescription.getReOrderLevel());
-                                boolean update = itemService.update(itemDTO1);
-                                if (update) {
-                                    JOptionPane.showMessageDialog(this, "Item Added Successfully..");
-                                    addItembarcodeTxt.setText("");
-                                    addItemdescriptionTxt.setText("");
-                                    addItempackSizeTxt.setText("");
-                                    addItemreOrderLevelTxt.setText("");
-                                    addItemBatchTxt.setText("");
-                                    addItemEXPDateTxt.setText("");
-                                    addItemMFDTxt.setText("");
-                                    addItemQtyOnHandTxt.setText("");
-                                    addItemUnitPriceTxt.setText("");
-                                    addItembarcodeTxt.setRequestFocusEnabled(true);
-                                } else {
-                                    JOptionPane.showMessageDialog(this, "Item Added Faild..");
-                                    addItembarcodeTxt.setText("");
-                                    addItemdescriptionTxt.setText("");
-                                    addItempackSizeTxt.setText("");
-                                    addItemreOrderLevelTxt.setText("");
-                                    addItemBatchTxt.setText("");
-                                    addItemEXPDateTxt.setText("");
-                                    addItemMFDTxt.setText("");
-                                    addItemQtyOnHandTxt.setText("");
-                                    addItemUnitPriceTxt.setText("");
-                                    addItembarcodeTxt.setRequestFocusEnabled(true);
-                                }
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(this, ex);
                             }
-                        } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(this, ex);
+                        } else {
+                            JOptionPane.showMessageDialog(this, "This Item Already Exits...");
                         }
+
                     } else {
-                        JOptionPane.showMessageDialog(this, "This Item Already Exits...");
+                        JOptionPane.showMessageDialog(this, "This Barcode Already Refistered");
                     }
-
-                } else {
-                    JOptionPane.showMessageDialog(this, "This Barcode Already Refistered");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, ex);
                 }
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex);
-            }
 
+            } else {
+                JOptionPane.showMessageDialog(this, "Please input data first..");
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Please input data first..");
+            JOptionPane.showMessageDialog(this, "Please Enter only 34 characters description..");
         }
 
     }//GEN-LAST:event_btnAddItemForDBActionPerformed
@@ -3396,93 +3698,95 @@ public class AdminPanel extends javax.swing.JFrame {
             boolean v7 = Validation.validateEmptyTextFeald(MFDtxt);
             boolean v8 = Validation.validateEmptyTextFeald(qty);
             boolean v9 = Validation.validateEmptyTextFeald(unitPrice);
+            if (description.trim().length() < 34) {
 
-            if (!v2 && !v3 && !v4 && !v5 && !v6 && !v7 && !v8 && !v9) {
-                ItemService itemService = (ItemService) context.getBean("ItemService");
-                try {
-                    Item searchItemIsAlreadyExits = itemService.getItemByDescription(description.trim());
-                    Item searchItemAlreadyExitsByBarcode = itemService.getItemByBarcode(barcode.trim());
-                    if (searchItemAlreadyExitsByBarcode == null) {
-                        if (searchItemIsAlreadyExits == null) {
-                            //Create ITEM
-                            ItemDTO i = new ItemDTO();
-                            i.setBarcode(barcode);
-                            i.setDescription(description);
-                            i.setPackSize(packSize);
-                            i.setReOrderLevel(Integer.parseInt(reOrderLevel));
-                            //Create Batch
-                            LocalDate MFD = new LocalDate(MFDtxt);
-                            LocalDate EXP = new LocalDate(EXPtxt);
+                if (!v2 && !v3 && !v4 && !v5 && !v6 && !v7 && !v8 && !v9) {
+                    ItemService itemService = (ItemService) context.getBean("ItemService");
+                    try {
+                        Item searchItemIsAlreadyExits = itemService.getItemByDescription(description.trim());
+                        Item searchItemAlreadyExitsByBarcode = itemService.getItemByBarcode(barcode.trim());
+                        if (searchItemAlreadyExitsByBarcode == null) {
+                            if (searchItemIsAlreadyExits == null) {
+                                //Create ITEM
+                                ItemDTO i = new ItemDTO();
+                                i.setBarcode(barcode);
+                                i.setDescription(description);
+                                i.setPackSize(packSize);
+                                i.setReOrderLevel(Integer.parseInt(reOrderLevel));
+                                //Create Batch
+                                LocalDate MFD = new LocalDate(MFDtxt);
+                                LocalDate EXP = new LocalDate(EXPtxt);
 
-                            Batch batchDto = new Batch();
-                            batchDto.setBatch(batch);
-                            batchDto.setEXPD(EXP);
-                            batchDto.setMFD(MFD);
-                            batchDto.setQtyOnHand(Double.parseDouble(qty));
-                            batchDto.setUnitPrice(Double.parseDouble(unitPrice));
+                                Batch batchDto = new Batch();
+                                batchDto.setBatch(batch);
+                                batchDto.setEXPD(EXP);
+                                batchDto.setMFD(MFD);
+                                batchDto.setQtyOnHand(Double.parseDouble(qty));
+                                batchDto.setUnitPrice(Double.parseDouble(unitPrice));
 
-                            try {
-                                boolean add = itemService.add(i);
-                                if (add) {
-                                    Item itemByDescription = itemService.getItemByDescription(description);
-                                    int searchedId = itemByDescription.getId();
-                                    List<Batch> allBatch = itemService.getItemsBatchesById(searchedId);
-                                    if (allBatch == null) {
-                                        allBatch = new ArrayList<>();
+                                try {
+                                    boolean add = itemService.add(i);
+                                    if (add) {
+                                        Item itemByDescription = itemService.getItemByDescription(description);
+                                        int searchedId = itemByDescription.getId();
+                                        List<Batch> allBatch = itemService.getItemsBatchesById(searchedId);
+                                        if (allBatch == null) {
+                                            allBatch = new ArrayList<>();
+                                        }
+                                        allBatch.add(batchDto);
+                                        itemByDescription.setBatch(allBatch);
+                                        //item for batch added then update item
+                                        ItemDTO itemDTO1 = new ItemDTO();
+                                        itemDTO1.setBarcode(itemByDescription.getBarcode());
+                                        itemDTO1.setBatch(itemByDescription.getBatch());
+                                        itemDTO1.setDescription(itemByDescription.getDescription());
+                                        itemDTO1.setId(itemByDescription.getId());
+                                        itemDTO1.setPackSize(itemByDescription.getPackSize());
+                                        itemDTO1.setReOrderLevel(itemByDescription.getReOrderLevel());
+                                        boolean update = itemService.update(itemDTO1);
+                                        if (update) {
+                                            JOptionPane.showMessageDialog(this, "Item Added Successfully..");
+                                            addItembarcodeTxt.setText("");
+                                            addItemdescriptionTxt.setText("");
+                                            addItempackSizeTxt.setText("");
+                                            addItemreOrderLevelTxt.setText("");
+                                            addItemBatchTxt.setText("");
+                                            addItemEXPDateTxt.setText("");
+                                            addItemMFDTxt.setText("");
+                                            addItemQtyOnHandTxt.setText("");
+                                            addItemUnitPriceTxt.setText("");
+                                            addItembarcodeTxt.setRequestFocusEnabled(true);
+                                        } else {
+                                            JOptionPane.showMessageDialog(this, "Item Added Faild..");
+                                            addItembarcodeTxt.setText("");
+                                            addItemdescriptionTxt.setText("");
+                                            addItempackSizeTxt.setText("");
+                                            addItemreOrderLevelTxt.setText("");
+                                            addItemBatchTxt.setText("");
+                                            addItemEXPDateTxt.setText("");
+                                            addItemMFDTxt.setText("");
+                                            addItemQtyOnHandTxt.setText("");
+                                            addItemUnitPriceTxt.setText("");
+                                            addItembarcodeTxt.setRequestFocusEnabled(true);
+                                        }
                                     }
-                                    allBatch.add(batchDto);
-                                    itemByDescription.setBatch(allBatch);
-                                    //item for batch added then update item
-                                    ItemDTO itemDTO1 = new ItemDTO();
-                                    itemDTO1.setBarcode(itemByDescription.getBarcode());
-                                    itemDTO1.setBatch(itemByDescription.getBatch());
-                                    itemDTO1.setDescription(itemByDescription.getDescription());
-                                    itemDTO1.setId(itemByDescription.getId());
-                                    itemDTO1.setPackSize(itemByDescription.getPackSize());
-                                    itemDTO1.setReOrderLevel(itemByDescription.getReOrderLevel());
-                                    boolean update = itemService.update(itemDTO1);
-                                    if (update) {
-                                        JOptionPane.showMessageDialog(this, "Item Added Successfully..");
-                                        addItembarcodeTxt.setText("");
-                                        addItemdescriptionTxt.setText("");
-                                        addItempackSizeTxt.setText("");
-                                        addItemreOrderLevelTxt.setText("");
-                                        addItemBatchTxt.setText("");
-                                        addItemEXPDateTxt.setText("");
-                                        addItemMFDTxt.setText("");
-                                        addItemQtyOnHandTxt.setText("");
-                                        addItemUnitPriceTxt.setText("");
-                                        addItembarcodeTxt.setRequestFocusEnabled(true);
-                                    } else {
-                                        JOptionPane.showMessageDialog(this, "Item Added Faild..");
-                                        addItembarcodeTxt.setText("");
-                                        addItemdescriptionTxt.setText("");
-                                        addItempackSizeTxt.setText("");
-                                        addItemreOrderLevelTxt.setText("");
-                                        addItemBatchTxt.setText("");
-                                        addItemEXPDateTxt.setText("");
-                                        addItemMFDTxt.setText("");
-                                        addItemQtyOnHandTxt.setText("");
-                                        addItemUnitPriceTxt.setText("");
-                                        addItembarcodeTxt.setRequestFocusEnabled(true);
-                                    }
+                                } catch (Exception ex) {
+                                    JOptionPane.showMessageDialog(this, ex);
                                 }
-                            } catch (Exception ex) {
-                                JOptionPane.showMessageDialog(this, ex);
+                            } else {
+                                JOptionPane.showMessageDialog(this, "This Item Already Exits...");
                             }
+
                         } else {
-                            JOptionPane.showMessageDialog(this, "This Item Already Exits...");
+                            JOptionPane.showMessageDialog(this, "This Barcode Already Refistered");
                         }
-
-                    } else {
-                        JOptionPane.showMessageDialog(this, "This Barcode Already Refistered");
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(this, ex);
                     }
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, ex);
-                }
 
-            } else {
-                JOptionPane.showMessageDialog(this, "Please input data first..");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Please input data first..");
+                }
             }
         }
     }//GEN-LAST:event_btnAddItemForDBKeyPressed
@@ -4053,6 +4357,7 @@ public class AdminPanel extends javax.swing.JFrame {
         resetColour(btn_Home);
         resetColour(btn_Accounts);
         resetColour(btn_Item);
+        resetColour(btn_BackUpPanel);
         resetColour(btn_ReorderLevel);
         resetColour(btn_Reports);
         resetColour(btn_Returns);
@@ -4683,6 +4988,7 @@ public class AdminPanel extends javax.swing.JFrame {
         resetColour(btn_Home);
         resetColour(btn_Accounts);
         resetColour(btn_Item);
+        resetColour(btn_BackUpPanel);
         resetColour(btn_ReorderLevel);
         resetColour(btn_Reports);
         resetColour(btn_GRN);
@@ -4718,7 +5024,6 @@ public class AdminPanel extends javax.swing.JFrame {
                 try {
                     Item itemByBarcode = itemService.getItemByBarcode(barcode);
                     if (itemByBarcode == null) {
-                        onGRNBarcodetxt.setText("");
                         onGRNPackSizeTxt.setText("");
                         onGRNDescriptionTxt.setText("");
                         listModel3.removeAllElements();
@@ -4731,7 +5036,7 @@ public class AdminPanel extends javax.swing.JFrame {
                         OnGRNBatchItemIDtxt.setText("");
                         onGRNUnitPriceTxt.setText("");
                         onGRNBatchTxt.setText("");
-                        JOptionPane.showMessageDialog(this, "Can not Find Item... unregistered Barcode Value!");
+
                     } else {
                         List<Batch> allBatches = itemService.getItemsBatchesById(itemByBarcode.getId());
                         listModel3.removeAllElements();
@@ -4754,13 +5059,13 @@ public class AdminPanel extends javax.swing.JFrame {
                 }
             }
         }
-        if(evt.getKeyCode()==KeyEvent.VK_END){
+        if (evt.getKeyCode() == KeyEvent.VK_END) {
             suplierNameTxt.requestFocusInWindow();
         }
-        if(evt.getKeyCode()==KeyEvent.VK_ESCAPE){
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             grnSearchByBarcodeTxt.selectAll();
         }
-        if(evt.getKeyCode()==KeyEvent.VK_F1){
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
             tableGRN.requestFocusInWindow();
         }
     }//GEN-LAST:event_grnSearchByBarcodeTxtKeyPressed
@@ -4799,40 +5104,43 @@ public class AdminPanel extends javax.swing.JFrame {
         boolean v2 = Validation.validateEmptyTextFeald(iId);
         if (!v1 && !v2) {
             String a = onGRNAddingQtyTxt.getText();
-            boolean v3 = Validation.validateEmptyTextFeald(a);
-            if (!v3) {
-                DefaultTableModel model = (DefaultTableModel) tableGRN.getModel();
-                int rowCount = model.getRowCount();
-                int found = -1;
-                for (int i = rowCount - 1; i >= 0; i--) {
-                    Object val = model.getValueAt(i, 1);
-                    String batchId = val.toString();
-                    if (bId.equalsIgnoreCase(batchId)) {
-                        found = i;
+            boolean matches = a.matches("\\d+(\\.\\d{1,2})?");
+            if (matches) {
+                boolean v3 = Validation.validateEmptyTextFeald(a);
+                if (!v3) {
+                    DefaultTableModel model = (DefaultTableModel) tableGRN.getModel();
+                    int rowCount = model.getRowCount();
+                    int found = -1;
+                    for (int i = rowCount - 1; i >= 0; i--) {
+                        Object val = model.getValueAt(i, 1);
+                        String batchId = val.toString();
+                        if (bId.equalsIgnoreCase(batchId)) {
+                            found = i;
+                        }
                     }
-                }
-                if (found != -1) {
-                    Object qty = model.getValueAt(found, 5);
-                    String qtyString = qty.toString();
-                    Double addedQty = Double.parseDouble(qtyString);
-                    Double addingQty = Double.parseDouble(a);
-                    Double result = addedQty + addingQty;
-                    model.setValueAt(result.toString(), found, 5);
+                    if (found != -1) {
+                        Object qty = model.getValueAt(found, 5);
+                        String qtyString = qty.toString();
+                        Double addedQty = Double.parseDouble(qtyString);
+                        Double addingQty = Double.parseDouble(a);
+                        Double result = addedQty + addingQty;
+                        model.setValueAt(result.toString(), found, 5);
+                    } else {
+                        model.addRow(new Object[]{
+                            iId,
+                            bId,
+                            onGRNDescriptionTxt.getText(),
+                            onGRNPackSizeTxt.getText(),
+                            onGRNUnitPriceTxt.getText(),
+                            a
+                        });
+                    }
+                    centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+                    tableGRN.setDefaultRenderer(String.class, centerRenderer);
+                    grnSearchByBarcodeTxt.requestFocusInWindow();
                 } else {
-                    model.addRow(new Object[]{
-                        iId,
-                        bId,
-                        onGRNDescriptionTxt.getText(),
-                        onGRNPackSizeTxt.getText(),
-                        onGRNUnitPriceTxt.getText(),
-                        a
-                    });
+                    JOptionPane.showMessageDialog(this, "Please Enter Adding Quantity");
                 }
-                centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-                tableGRN.setDefaultRenderer(String.class, centerRenderer);
-                grnSearchByBarcodeTxt.requestFocusInWindow();
-            } else {
-                JOptionPane.showMessageDialog(this, "Please Enter Adding Quantity");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Please Search Item And Select Batch On List");
@@ -5155,31 +5463,156 @@ public class AdminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3KeyPressed
 
     private void suplierNameTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_suplierNameTxtKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             jButton12.doClick();
         }
-        if(evt.getKeyCode()==KeyEvent.VK_ESCAPE){
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             grnSearchByBarcodeTxt.requestFocusInWindow();
         }
-        if(evt.getKeyCode()==KeyEvent.VK_F1){
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
             tableGRN.requestFocusInWindow();
         }
     }//GEN-LAST:event_suplierNameTxtKeyPressed
 
     private void tableGRNKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableGRNKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_DELETE){
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
             jButton15.doClick();
         }
-        if(evt.getKeyCode()==KeyEvent.VK_ESCAPE){
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             grnSearchByBarcodeTxt.requestFocusInWindow();
         }
-        if(evt.getKeyCode()==KeyEvent.VK_F1){
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
             tableGRN.requestFocusInWindow();
         }
-        if(evt.getKeyCode()==KeyEvent.VK_END){
+        if (evt.getKeyCode() == KeyEvent.VK_END) {
             suplierNameTxt.requestFocusInWindow();
         }
     }//GEN-LAST:event_tableGRNKeyPressed
+
+    private void btn_BackUpPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_BackUpPanelMousePressed
+        setColour(btn_BackUpPanel);
+        resetColour(btn_Home);
+        resetColour(btn_Accounts);
+        resetColour(btn_Item);
+        resetColour(btn_Returns);
+        resetColour(btn_ReorderLevel);
+        resetColour(btn_Reports);
+        resetColour(btn_GRN);
+        navigationLable.setText("Admin/Back Up");
+        todayTransactioLable.setText("");
+        //RemoveAll on Panel and repaint 
+        viewPanel.removeAll();
+        viewPanel.repaint();
+        viewPanel.revalidate();
+        //add Home Panel
+        viewPanel.add(BackUpsPanel);
+        viewPanel.repaint();
+        viewPanel.revalidate();
+    }//GEN-LAST:event_btn_BackUpPanelMousePressed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        JFileChooser fc = new JFileChooser();
+        fc.setBackground(Color.WHITE);
+        fc.setForeground(new Color(51, 51, 51));
+        fc.showOpenDialog(this);
+        String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        try {
+            File f = fc.getSelectedFile();
+            path = f.getAbsolutePath();
+            boolean v1 = Validation.validateEmptyTextFeald(path);
+            if (!v1) {
+                path = path.replace('\\', '/');
+                path = path + "_" + today + ".sql";
+                pathTxt.setText(path);
+            } else {
+                JOptionPane.showMessageDialog(this, "Choose back up file path..");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        if (!Validation.validateEmptyTextFeald(path)) {
+            Process p = null;
+            try {
+                Runtime runtime = Runtime.getRuntime();
+                p = runtime.exec("C:/Program Files (x86)/MySQL/MySQL Server 5.6/bin/mysqldump.exe -uroot -pmysql --add-drop-database -B mypos -r" + pathTxt.getText());
+                int result = p.waitFor();
+                if (result == 0) {
+                    JOptionPane.showMessageDialog(this, "Back up Successfully...");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Can't back up..");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please Choose Path Or Click Static Path button.. First");
+        }
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        path = "C:/BackUps/back_up";
+        path = path + "_" + today + ".sql";
+        try {
+            File f = new File(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        pathTxt.setText(path);
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void btn_restoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_restoreActionPerformed
+        String backUpFilePath = selectedBackUpFilePathTxt.getText();
+        if (!Validation.validateEmptyTextFeald(backUpFilePath)) {
+            String userName = "root";
+            String pw = "mysql";
+            String[] reStoreCmd = new String[]{"C:/Program Files (x86)/MySQL/MySQL Server 5.6/bin/mysql.exe",
+                "--user=" + userName, "--password=" + pw, "-e", "source " + backUpFilePath};
+            Process process;
+            try {
+                process = Runtime.getRuntime().exec(reStoreCmd);
+                int result = process.waitFor();
+                if (result == 0) {
+                    JOptionPane.showMessageDialog(this, "Restore Successfully...");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Restore Faild...");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_btn_restoreActionPerformed
+
+    private void btnBrows2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrows2ActionPerformed
+        JFileChooser fc = new JFileChooser();
+        fc.setBackground(Color.WHITE);
+        fc.setForeground(new Color(51, 51, 51));
+        fc.showOpenDialog(this);
+        File f = fc.getSelectedFile();
+        path = f.getAbsolutePath();
+        boolean v1 = Validation.validateEmptyTextFeald(path);
+        if (!v1) {
+            path = path.replace('\\', '/');
+            selectedBackUpFilePathTxt.setText(path);
+        }
+    }//GEN-LAST:event_btnBrows2ActionPerformed
+
+    private void onGRNAddingQtyTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_onGRNAddingQtyTxtKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            putToGrnTableButton.doClick();
+        }
+    }//GEN-LAST:event_onGRNAddingQtyTxtKeyPressed
+
+    private void jButton12KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton12KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButton12.doClick();
+        }
+    }//GEN-LAST:event_jButton12KeyPressed
 
     /**
      * @param args the command line arguments
@@ -5217,6 +5650,7 @@ public class AdminPanel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AccountsViewPanel;
+    private javax.swing.JPanel BackUpsPanel;
     private javax.swing.JPanel BatchViewPanel;
     private javax.swing.JLabel DateLable;
     private javax.swing.JPanel DeleteItemPanel;
@@ -5256,6 +5690,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JPanel btnAddNewItem3;
     private javax.swing.JPanel btnAddNewItem4;
     private javax.swing.JPanel btnBatchONViewAllItem;
+    private javax.swing.JButton btnBrows2;
     private javax.swing.JPanel btnDeleteItemonItem;
     private javax.swing.JPanel btnUpdateItem1;
     private javax.swing.JPanel btnUpdateItem2;
@@ -5269,12 +5704,14 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JPanel btnViewAllItems2;
     private javax.swing.JPanel btnViewAllItems3;
     private javax.swing.JPanel btn_Accounts;
+    private javax.swing.JPanel btn_BackUpPanel;
     private javax.swing.JPanel btn_GRN;
     private javax.swing.JPanel btn_Home;
     private javax.swing.JPanel btn_Item;
     private javax.swing.JPanel btn_ReorderLevel;
     private javax.swing.JPanel btn_Reports;
     private javax.swing.JPanel btn_Returns;
+    private javax.swing.JButton btn_restore;
     private javax.swing.JLabel givenDiscountLable;
     private javax.swing.JTextField grnSearchByBarcodeTxt;
     private javax.swing.JPanel headerPanel;
@@ -5286,10 +5723,13 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JPanel itemSubMenuPanel4;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -5308,7 +5748,13 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel105;
     private javax.swing.JLabel jLabel106;
     private javax.swing.JLabel jLabel107;
+    private javax.swing.JLabel jLabel108;
+    private javax.swing.JLabel jLabel109;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel110;
+    private javax.swing.JLabel jLabel111;
+    private javax.swing.JLabel jLabel112;
+    private javax.swing.JLabel jLabel113;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -5405,10 +5851,12 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel97;
     private javax.swing.JLabel jLabel98;
     private javax.swing.JLabel jLabel99;
+    private javax.swing.JPanel jPanel11112;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -5422,6 +5870,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JLabel jlabeljhjha;
     private javax.swing.JLabel labelMFFDD;
     private javax.swing.JList<String> listOnBatchUpdate;
@@ -5470,11 +5919,14 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JTextField onUpdateReOrderLevelTxt;
     private javax.swing.JTextField onUpdateSearchByDescTxt;
     private javax.swing.JTextField onbatchDescriptionTxt;
+    private javax.swing.JTextField pathTxt;
     private javax.swing.JButton putToGrnTableButton;
+    private javax.swing.JTable reOrderLevelTable;
     private javax.swing.JTextField searchByBarcodeForDeleteItemOrBatchTxt;
     private javax.swing.JTextField searchByBarcodeTxtForBatch;
     private javax.swing.JComboBox<String> searchByDescriptionForBatchCombo;
     private javax.swing.JTextField searchForDeleteItemByDescriptionTxt;
+    private javax.swing.JTextField selectedBackUpFilePathTxt;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JTextField suplierNameTxt;
     private javax.swing.JTable tableGRN;
@@ -5561,6 +6013,22 @@ public class AdminPanel extends javax.swing.JFrame {
                 warn3();
             }
         });
+        grnSearchByBarcodeTxt.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                warn7();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                warn7();
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                warn7();
+            }
+        });
     }
 
     private void warn() {
@@ -5610,6 +6078,49 @@ public class AdminPanel extends javax.swing.JFrame {
         }
     }
 
+    private void warn7() {
+        String barcode = grnSearchByBarcodeTxt.getText();
+        if (!Validation.validateEmptyTextFeald(barcode)) {
+            ItemService itemService = (ItemService) context.getBean("ItemService");
+            try {
+                Item itemByBarcode = itemService.getItemByBarcode(barcode);
+                if (itemByBarcode == null) {
+                    onGRNPackSizeTxt.setText("");
+                    onGRNDescriptionTxt.setText("");
+                    listModel3.removeAllElements();
+                    listModelForBatchObjects.removeAllElements();
+                    onGRNLISTBatch.setModel(listModel2);
+                    onGrnBatchIDtxt.setText("");
+                    onGRNMFDateTxt.setText("");
+                    onGRNBatchEXPDateTxt.setText("");
+                    onGRNbatchQtyOnHandTxt.setText("");
+                    OnGRNBatchItemIDtxt.setText("");
+                    onGRNUnitPriceTxt.setText("");
+                    onGRNBatchTxt.setText("");
+
+                } else {
+                    List<Batch> allBatches = itemService.getItemsBatchesById(itemByBarcode.getId());
+                    listModel3.removeAllElements();
+                    listModelForBatchObjects.removeAllElements();
+                    if (allBatches != null) {
+                        for (Batch b : allBatches) {
+                            listModel3.addElement(b.getBatch());
+                            listModelForBatchObjects.addElement(b);
+                        }
+                        onGRNLISTBatch.setModel(listModel3);
+                        onGRNBarcodetxt.setText(itemByBarcode.getBarcode());
+                        onGRNPackSizeTxt.setText(itemByBarcode.getPackSize());
+                        onGRNDescriptionTxt.setText(itemByBarcode.getDescription());
+                        OnGRNBatchItemIDtxt.setText(itemByBarcode.getId() + "");
+                    }
+
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+        }
+    }
+
     private void warn3() {
         String desc = onGRNSearchByDescriptionTxt.getText();
         boolean v1 = Validation.validateEmptyTextFeald(desc);
@@ -5637,9 +6148,9 @@ public class AdminPanel extends javax.swing.JFrame {
             m.removeRow(i);
         }
         LocalDate date = new LocalDate(DateLable.getText());
-        double totall=0;
-        double givenDis=0;
-        double income=0;
+        double totall = 0;
+        double givenDis = 0;
+        double income = 0;
         try {
             List<Orders> all = orderService.getTodayTransaction(date);
             if (all != null) {
@@ -5651,9 +6162,9 @@ public class AdminPanel extends javax.swing.JFrame {
                     double discounts = o.getDiscounts();
                     double total = o.getTotal();
                     double subTot = o.getSubTot();
-                    givenDis=givenDis+discounts;
-                    totall=totall+total;
-                    income=income+subTot;
+                    givenDis = givenDis + discounts;
+                    totall = totall + total;
+                    income = income + subTot;
                     m.addRow(new Object[]{
                         dd,
                         time,
@@ -5664,14 +6175,47 @@ public class AdminPanel extends javax.swing.JFrame {
                     });
                 }
             }
-            todayIncomeLable.setText(income+"0");
-            givenDiscountLable.setText(givenDis+"0");
-            totalLable.setText(totall+"0");
+            todayIncomeLable.setText(income + "0");
+            givenDiscountLable.setText(givenDis + "0");
+            totalLable.setText(totall + "0");
             toDayTransactionTable.setModel(m);
             centerRenderer.setHorizontalAlignment(JLabel.CENTER);
             toDayTransactionTable.setDefaultRenderer(String.class, centerRenderer);
         } catch (Exception ex) {
             Logger.getLogger(AdminPanel.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex);
         }
+    }
+
+    private void setReOrderLevelItems() {
+        DefaultTableModel m = (DefaultTableModel) reOrderLevelTable.getModel();
+        int rowCount = m.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            m.removeRow(i);
+        }
+        BatchService batchService = (BatchService) context.getBean("BatchService");
+        try {
+            List<ReOrderLevelItemDTO> all = batchService.getReOrderLevelItems();
+            if (all != null) {
+                for (ReOrderLevelItemDTO r : all) {
+                    m.addRow(new Object[]{
+                        r.getItemId() + "",
+                        r.getDescription(),
+                        r.getPackSize() + "",
+                        r.getAvailabelBatchQty() + "",
+                        r.getReorderLevel() + "0",
+                        r.getStockQty() + "0"
+                    });
+
+                }
+
+                centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+                reOrderLevelTable.setDefaultRenderer(String.class, centerRenderer);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(AdminPanel.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex);
+        }
+
     }
 }
