@@ -8,7 +8,6 @@ package com.alpha.service.custom.impl;
 import com.alpha.dao.custom.BatchDAO;
 import com.alpha.dao.custom.OrderDetailsDAO;
 import com.alpha.dao.custom.OrdersDAO;
-import com.alpha.dao.custom.UserDAO;
 import com.alpha.dto.OrderDTO;
 import com.alpha.model.Batch;
 import com.alpha.model.OrderDetails;
@@ -55,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Orders search(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return orderDAO.search(id);
     }
 
     @Override
@@ -66,7 +65,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public int addOrder(OrderDTO orderDTO) throws Exception {
-        int count=0;
+        int count = 0;
         Orders orders = new Orders();
         Set<OrderDetails> all = orderDTO.getOrderDetails();
         orders.setDate(orderDTO.getDate());
@@ -80,18 +79,18 @@ public class OrderServiceImpl implements OrderService {
             double orderOTY = o.getOrderOTY();
             Batch b = o.getBatch();
             double qtyOnHand = b.getQtyOnHand();
-            double updateQty=qtyOnHand-orderOTY;
+            double updateQty = qtyOnHand - orderOTY;
             b.setQtyOnHand(updateQty);
             batchDAO.update(b);
             o.setBatch(b);
             o.setOrders(searchedOrder);
             orderDetailsDAO.add(o);
             count++;
-            
+
         }
-        if(all.size()==count){
+        if (all.size() == count) {
             return addOrder;
-        }else{
+        } else {
             return -1;
         }
     }
@@ -99,6 +98,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Orders> getTodayTransaction(LocalDate date) throws Exception {
         return orderDAO.getTodayTransaction(date);
+    }
+
+    @Override
+    public List<OrderDetails> getOrderDetailsByOrderId(int id) throws Exception {
+        return orderDetailsDAO.getOrderDetailsByOrderID(id);
     }
 
 }

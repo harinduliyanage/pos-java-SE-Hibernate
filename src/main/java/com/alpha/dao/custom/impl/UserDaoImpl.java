@@ -82,4 +82,15 @@ public class UserDaoImpl implements UserDAO {
         List<User> list = sql.list();
         return list;
     }
+
+    @Override
+    public User getUserByTypeAndPassword(String type, String pass) throws Exception {
+        Criteria c2 = sessionFactory.getCurrentSession().createCriteria(User.class);
+        c2.add(Restrictions.eq("type", type));
+        c2.add(Restrictions.eq("password", pass));
+        c2.setMaxResults(1);
+        User user = (User) c2.uniqueResult();
+        return user;
+        
+    }
 }

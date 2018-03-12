@@ -133,5 +133,8 @@ public class UserServiceImpl implements UserService {
     public List<User> foundByLike(String value) throws Exception {
         return userDAO.foundByLike(value);
     }
-
+    @Override
+    public User getUserByTypeAndPassword(String type , String pass)throws Exception{
+       return userDAO.getUserByTypeAndPassword(type , pass);
+    }
 }

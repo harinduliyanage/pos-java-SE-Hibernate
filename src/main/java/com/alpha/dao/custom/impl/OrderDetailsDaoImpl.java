@@ -9,7 +9,10 @@ import com.alpha.dao.custom.OrderDetailsDAO;
 import com.alpha.model.OrderDetails;
 import java.io.Serializable;
 import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -55,5 +58,14 @@ public class OrderDetailsDaoImpl implements OrderDetailsDAO{
         List<OrderDetails> list = sessionFactory.getCurrentSession().createCriteria(OrderDetails.class).list();
         return list;
     }
+
+    @Override
+    public List<OrderDetails> getOrderDetailsByOrderID(int id) throws Exception {
+        SQLQuery sql = sessionFactory.getCurrentSession().createSQLQuery("select*from order_details where order_id='"+id+"'");
+        sql.addEntity(OrderDetails.class);
+        List<OrderDetails> list = sql.list();
+        return list;
+    }
+    
     
 }

@@ -6,6 +6,7 @@
 package com.alpha.service.custom;
 
 import com.alpha.dto.OrderDTO;
+import com.alpha.model.OrderDetails;
 import com.alpha.model.Orders;
 import com.alpha.service.SuperService;
 import java.util.List;
@@ -18,4 +19,5 @@ import org.joda.time.LocalDate;
 public interface OrderService extends SuperService<Orders>{
     public int addOrder(OrderDTO orderDTO)throws Exception;
     public List<Orders> getTodayTransaction(LocalDate localDate)throws Exception;
+    public List<OrderDetails> getOrderDetailsByOrderId(int id)throws Exception;
 }

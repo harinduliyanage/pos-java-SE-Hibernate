@@ -15,7 +15,7 @@ import java.util.List;
  * @author Harindu.sul
  */
 public interface UserService extends SuperService<UserDTO>{
-
+    public User getUserByTypeAndPassword(String type , String pass)throws Exception;
     public UserDTO searchByUserName(String userName)throws Exception;
     public UserDTO authentication(String userType, String userName, String password) throws Exception; 
     public List<User> foundByLike(String value) throws Exception;

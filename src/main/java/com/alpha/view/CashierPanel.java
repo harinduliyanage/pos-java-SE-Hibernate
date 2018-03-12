@@ -153,6 +153,7 @@ public class CashierPanel extends javax.swing.JFrame {
         givenMoneyTxt = new javax.swing.JFormattedTextField();
         balanceLable = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         logOut = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
         DateLable = new javax.swing.JLabel();
@@ -552,6 +553,16 @@ public class CashierPanel extends javax.swing.JFrame {
         jLabel20.setForeground(new java.awt.Color(51, 51, 51));
         jLabel20.setText("Balance        :");
 
+        jButton1.setBackground(new java.awt.Color(51, 51, 51));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Return Order");
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout backGroundPanelLayout = new javax.swing.GroupLayout(backGroundPanel);
         backGroundPanel.setLayout(backGroundPanelLayout);
         backGroundPanelLayout.setHorizontalGroup(
@@ -585,7 +596,8 @@ public class CashierPanel extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(backGroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(cashierBatchUnitPriceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cashierStoreDiscountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(cashierStoreDiscountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(backGroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -689,7 +701,9 @@ public class CashierPanel extends javax.swing.JFrame {
                                 .addComponent(cashierCompantyTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel11)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_put_To_Cart, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(backGroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_put_To_Cart, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
                         .addGroup(backGroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1270,6 +1284,14 @@ public class CashierPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_givenMoneyTxtKeyPressed
 
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
+            ReturnOrderFrame r = new ReturnOrderFrame();
+            r.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            r.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -1331,6 +1353,7 @@ public class CashierPanel extends javax.swing.JFrame {
     private javax.swing.JLabel disCountLable;
     private javax.swing.JFormattedTextField givenMoneyTxt;
     private javax.swing.JLabel grossTotalLable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
