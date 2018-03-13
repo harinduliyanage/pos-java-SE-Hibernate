@@ -43,13 +43,26 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public boolean delete(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<OrderDetails> all = orderDetailsDAO.getOrderDetailsByOrderID(id);
+        if(all!=null){
+            for (OrderDetails o : all) {
+                Batch batch = o.getBatch();
+                double qtyOnHand = batch.getQtyOnHand();
+                double orderOTY = o.getOrderOTY();
+                qtyOnHand=qtyOnHand+orderOTY;
+                batch.setQtyOnHand(qtyOnHand);
+                batchDAO.update(batch);
+                orderDetailsDAO.delete(o.getId());
+            }
+        }
+        return orderDAO.delete(id);
     }
 
     @Override
     public boolean update(Orders t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return orderDAO.update(t);
     }
 
     @Override
@@ -103,6 +116,18 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDetails> getOrderDetailsByOrderId(int id) throws Exception {
         return orderDetailsDAO.getOrderDetailsByOrderID(id);
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteOrderDetail(int id,Orders s,int batchId,double oQty) throws Exception {
+        Batch search = batchDAO.search(batchId);
+        double qtyOnHand = search.getQtyOnHand();
+        qtyOnHand=qtyOnHand+oQty;
+        search.setQtyOnHand(qtyOnHand);
+        batchDAO.update(search);
+        orderDAO.update(s);
+        return orderDetailsDAO.delete(id);
     }
 
 }

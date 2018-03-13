@@ -60,7 +60,7 @@ public class BatchDaoImpl implements BatchDAO {
 
     @Override
     public Batch search(int id) throws Exception {
-        return (Batch) sessionFactory.getCurrentSession().load(Batch.class, id);
+        return (Batch) sessionFactory.getCurrentSession().get(Batch.class, id);
     }
 
     @Override

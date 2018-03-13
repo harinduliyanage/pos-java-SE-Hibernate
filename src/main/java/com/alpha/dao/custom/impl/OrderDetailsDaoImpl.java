@@ -38,9 +38,11 @@ public class OrderDetailsDaoImpl implements OrderDetailsDAO {
 
     @Override
     public boolean delete(int id) throws Exception {
-        OrderDetails search = (OrderDetails) sessionFactory.getCurrentSession().load(OrderDetails.class, id);
+        OrderDetails search = (OrderDetails) sessionFactory.getCurrentSession().get(OrderDetails.class, id);
         if (search != null) {
-            sessionFactory.getCurrentSession().delete(search);
+            SQLQuery sql = sessionFactory.getCurrentSession()
+                    .createSQLQuery("delete from order_details where ORDER_DETAILS_ID='"+id+"'");
+            int executeUpdate = sql.executeUpdate();
             return true;
         } else {
             return false;
@@ -55,7 +57,7 @@ public class OrderDetailsDaoImpl implements OrderDetailsDAO {
 
     @Override
     public OrderDetails search(int id) throws Exception {
-        return (OrderDetails) sessionFactory.getCurrentSession().load(OrderDetails.class, id);
+        return (OrderDetails) sessionFactory.getCurrentSession().get(OrderDetails.class, id);
     }
 
     @Override

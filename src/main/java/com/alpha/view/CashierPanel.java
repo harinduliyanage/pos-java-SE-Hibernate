@@ -565,6 +565,11 @@ public class CashierPanel extends javax.swing.JFrame {
                 btn_returnorderFocusLost(evt);
             }
         });
+        btn_returnorder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_returnorderActionPerformed(evt);
+            }
+        });
         btn_returnorder.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 btn_returnorderKeyPressed(evt);
@@ -1345,10 +1350,10 @@ public class CashierPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_givenMoneyTxtKeyPressed
 
     private void btn_returnorderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_returnorderKeyPressed
-        if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             ReturnOrderFrame r = new ReturnOrderFrame();
             r.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            r.setVisible(true);            
+            r.setVisible(true);
         }
         if (evt.getKeyCode() == KeyEvent.VK_F12) {
             btn_returnorder.requestFocusInWindow();
@@ -1378,6 +1383,12 @@ public class CashierPanel extends javax.swing.JFrame {
         btn_returnorder.setBackground(new Color(51, 51, 51));
         btn_returnorder.setForeground(Color.white);
     }//GEN-LAST:event_btn_returnorderFocusLost
+
+    private void btn_returnorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_returnorderActionPerformed
+        ReturnOrderFrame r = new ReturnOrderFrame();
+        r.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        r.setVisible(true);
+    }//GEN-LAST:event_btn_returnorderActionPerformed
 
     /**
      * @param args the command line arguments
