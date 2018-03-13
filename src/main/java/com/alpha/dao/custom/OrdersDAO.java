@@ -7,6 +7,7 @@ package com.alpha.dao.custom;
 
 import com.alpha.dao.SuperDAO;
 import com.alpha.model.Orders;
+import java.util.HashMap;
 import java.util.List;
 import org.joda.time.LocalDate;
 
@@ -18,5 +19,6 @@ public interface OrdersDAO extends SuperDAO<Orders>{
     public int addOrder(Orders o)throws Exception;
     public List<Orders> getTodayTransaction(LocalDate date) throws Exception;
     public List<Orders> getBetweenTwodayTransaction(LocalDate date,LocalDate day2) throws Exception;
+    public HashMap<Integer,Integer> getPassMoveItems()throws Exception;
 
 }

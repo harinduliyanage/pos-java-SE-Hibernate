@@ -8,11 +8,14 @@ package com.alpha.dao.custom.impl;
 import com.alpha.dao.custom.OrdersDAO;
 import com.alpha.model.Orders;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import javax.persistence.Entity;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,10 +95,40 @@ public class OrdersDaoImpl implements OrdersDAO {
         return (List<Orders>)sql.list();
     }
 
+    @Override
+    public HashMap<Integer, Integer> getPassMoveItems() throws Exception {
+        Criteria cr = sessionFactory.getCurrentSession().createCriteria(Entity.class);
+        cr.setProjection(Projections.property("batch_id"));
+        cr.setProjection(Projections.sum("orderOty"));
+        cr.setProjection(Projections.groupProperty("batch_id"));
+        List list = cr.list();
+        for (Object o : list) {
+            
+        }
+        return new HashMap<>();
+    }
+
 }
 /*
 SELECT batch_id,SUM(orderOty) FROM order_details GROUP BY batch_id;
+*/
+
+/*
+// First, fetch first 20 elements' ids
+List<Integer> ids = session.createCriteria(Entity.class)
+        .setProjection(Projections.property("id"))
+        .setMaxResults(20)
+        .list();
+
+// Afterwards, do a sum on the desired field
+Long sum = (Long) session.createCriteria(Entity.class)
+        .setProjection(Projections.sum("propertyName"))
+        .add(Restrictions.in("id", ids))
+        .uniqueResult();
+
 
 
 */
+
+
 //SELECT batch_id, GROUP_CONCAT(orderOTY SEPARATOR ' ') FROM order_details GROUP BY batch_id;
