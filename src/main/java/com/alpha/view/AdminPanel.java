@@ -71,6 +71,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private DefaultListModel listModelForBatchObjects;
     private DefaultListModel listModel2;
     private DefaultListModel listModel3;
+    private DefaultListModel listModel4;
     private DefaultComboBoxModel searchCombModel;
     private DefaultTableCellRenderer centerRenderer;
     private String path;
@@ -83,6 +84,7 @@ public class AdminPanel extends javax.swing.JFrame {
         this.searchCombModel = new DefaultComboBoxModel();
         this.listModel2 = new DefaultListModel();
         this.listModel3 = new DefaultListModel();
+        this.listModel4 = new DefaultListModel();
         this.centerRenderer = new DefaultTableCellRenderer();
         this.path = "";
 
@@ -399,6 +401,36 @@ public class AdminPanel extends javax.swing.JFrame {
         onGRNAddingQtyTxt = new javax.swing.JFormattedTextField();
         ViewReturnPanel = new javax.swing.JPanel();
         jLabel108 = new javax.swing.JLabel();
+        returnBarcode = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel114 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel115 = new javax.swing.JLabel();
+        jLabel116 = new javax.swing.JLabel();
+        jLabel117 = new javax.swing.JLabel();
+        onReturnDescriptionTxt = new javax.swing.JTextField();
+        onReturnPackSizeTxt = new javax.swing.JTextField();
+        returnQtyTxt = new javax.swing.JTextField();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        onReturnLISTBatch = new javax.swing.JList<>();
+        btnReturnCart = new javax.swing.JButton();
+        jLabel118 = new javax.swing.JLabel();
+        jLabel119 = new javax.swing.JLabel();
+        jLabel120 = new javax.swing.JLabel();
+        jLabel121 = new javax.swing.JLabel();
+        jLabel122 = new javax.swing.JLabel();
+        jLabel123 = new javax.swing.JLabel();
+        jLabel124 = new javax.swing.JLabel();
+        onReturnBatchEXPDateTxt = new javax.swing.JTextField();
+        onReturnMFDateTxt = new javax.swing.JTextField();
+        onReturnUnitPriceTxt = new javax.swing.JTextField();
+        onReturnBatchTxt = new javax.swing.JTextField();
+        onReturnBatchIDtxt = new javax.swing.JTextField();
+        OnReturnBatchItemIDtxt = new javax.swing.JTextField();
+        onReturnbatchQtyOnHandTxt = new javax.swing.JTextField();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        tableReturns = new javax.swing.JTable();
+        jButton19 = new javax.swing.JButton();
         BackUpsPanel = new javax.swing.JPanel();
         jPanel11112 = new javax.swing.JPanel();
         pathTxt = new javax.swing.JTextField();
@@ -3070,24 +3102,288 @@ public class AdminPanel extends javax.swing.JFrame {
         viewPanel.add(viewGRNPanel, "card2");
 
         ViewReturnPanel.setBackground(new java.awt.Color(255, 255, 255));
+        ViewReturnPanel.setForeground(new java.awt.Color(51, 51, 51));
 
+        jLabel108.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel108.setText("Search By Barcode");
+
+        jLabel114.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel114.setText("Description");
+
+        jLabel115.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel115.setText("Description");
+
+        jLabel116.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel116.setText("Pack Size");
+
+        jLabel117.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel117.setText("Return Qty");
+
+        onReturnDescriptionTxt.setEditable(false);
+        onReturnDescriptionTxt.setBackground(new java.awt.Color(255, 255, 255));
+
+        onReturnPackSizeTxt.setEditable(false);
+        onReturnPackSizeTxt.setBackground(new java.awt.Color(255, 255, 255));
+
+        returnQtyTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                returnQtyTxtKeyPressed(evt);
+            }
+        });
+
+        onReturnLISTBatch.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        onReturnLISTBatch.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                onReturnLISTBatchValueChanged(evt);
+            }
+        });
+        jScrollPane12.setViewportView(onReturnLISTBatch);
+
+        btnReturnCart.setBackground(new java.awt.Color(51, 51, 51));
+        btnReturnCart.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnReturnCart.setForeground(new java.awt.Color(255, 255, 255));
+        btnReturnCart.setText("Put To Return Items Cart");
+        btnReturnCart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnCartActionPerformed(evt);
+            }
+        });
+
+        jLabel118.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel118.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel118.setText("EXP Date");
+
+        jLabel119.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel119.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel119.setText("MF Date");
+
+        jLabel120.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel120.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel120.setText("Batch");
+
+        jLabel121.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel121.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel121.setText("Unit Price");
+
+        jLabel122.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel122.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel122.setText("Qty On Hand");
+
+        jLabel123.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel123.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel123.setText("Item ID");
+
+        jLabel124.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel124.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel124.setText("Batch ID");
+
+        onReturnBatchEXPDateTxt.setEditable(false);
+        onReturnBatchEXPDateTxt.setBackground(new java.awt.Color(255, 255, 255));
+
+        onReturnMFDateTxt.setEditable(false);
+        onReturnMFDateTxt.setBackground(new java.awt.Color(255, 255, 255));
+
+        onReturnUnitPriceTxt.setEditable(false);
+        onReturnUnitPriceTxt.setBackground(new java.awt.Color(255, 255, 255));
+
+        onReturnBatchTxt.setEditable(false);
+        onReturnBatchTxt.setBackground(new java.awt.Color(255, 255, 255));
+
+        onReturnBatchIDtxt.setEditable(false);
+        onReturnBatchIDtxt.setBackground(new java.awt.Color(255, 255, 255));
+
+        OnReturnBatchItemIDtxt.setEditable(false);
+        OnReturnBatchItemIDtxt.setBackground(new java.awt.Color(255, 255, 255));
+
+        onReturnbatchQtyOnHandTxt.setEditable(false);
+        onReturnbatchQtyOnHandTxt.setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane13.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        tableReturns.setAutoCreateRowSorter(true);
+        tableReturns.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tableReturns.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Item ID", "Batch ID", "Description", "Pack Size", "Unit Price", "Return Qty"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableReturns.setGridColor(new java.awt.Color(255, 255, 255));
+        tableReturns.setRowHeight(28);
+        tableReturns.setSelectionBackground(new java.awt.Color(153, 153, 153));
+        tableReturns.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tableReturnsMousePressed(evt);
+            }
+        });
+        tableReturns.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tableReturnsKeyPressed(evt);
+            }
+        });
+        jScrollPane13.setViewportView(tableReturns);
+        if (tableReturns.getColumnModel().getColumnCount() > 0) {
+            tableReturns.getColumnModel().getColumn(0).setResizable(false);
+            tableReturns.getColumnModel().getColumn(1).setResizable(false);
+            tableReturns.getColumnModel().getColumn(2).setResizable(false);
+            tableReturns.getColumnModel().getColumn(3).setResizable(false);
+            tableReturns.getColumnModel().getColumn(4).setResizable(false);
+            tableReturns.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        jButton19.setBackground(new java.awt.Color(204, 0, 0));
+        jButton19.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton19.setForeground(new java.awt.Color(255, 255, 255));
+        jButton19.setText("Return Items");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ViewReturnPanelLayout = new javax.swing.GroupLayout(ViewReturnPanel);
         ViewReturnPanel.setLayout(ViewReturnPanelLayout);
         ViewReturnPanelLayout.setHorizontalGroup(
             ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ViewReturnPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel108)
-                .addContainerGap(1030, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ViewReturnPanelLayout.createSequentialGroup()
+                        .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel117, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel116, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel115, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel108, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(returnBarcode)
+                            .addComponent(onReturnDescriptionTxt)
+                            .addComponent(onReturnPackSizeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                            .addComponent(returnQtyTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)))
+                    .addComponent(btnReturnCart, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ViewReturnPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel120, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel121, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                            .addComponent(jLabel119, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel118, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(onReturnUnitPriceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(onReturnBatchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(onReturnMFDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(onReturnBatchEXPDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel122, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel124, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel123, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(onReturnbatchQtyOnHandTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(OnReturnBatchItemIDtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(onReturnBatchIDtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30))
+                    .addGroup(ViewReturnPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel114)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addComponent(jScrollPane13)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewReturnPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(106, 106, 106))
         );
         ViewReturnPanelLayout.setVerticalGroup(
             ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ViewReturnPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel108)
-                .addContainerGap(585, Short.MAX_VALUE))
+                .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ViewReturnPanelLayout.createSequentialGroup()
+                        .addComponent(returnBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2))
+                    .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel108, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel114, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ViewReturnPanelLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel118)
+                            .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(ViewReturnPanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel124)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel123)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel122)
+                                        .addComponent(onReturnUnitPriceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel121)))
+                                .addGroup(ViewReturnPanelLayout.createSequentialGroup()
+                                    .addComponent(onReturnBatchIDtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(OnReturnBatchItemIDtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(onReturnbatchQtyOnHandTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(ViewReturnPanelLayout.createSequentialGroup()
+                                    .addComponent(onReturnBatchEXPDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(onReturnMFDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel119))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(onReturnBatchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel120))
+                                    .addGap(26, 26, 26)))
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(ViewReturnPanelLayout.createSequentialGroup()
+                        .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel115, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(onReturnDescriptionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel116, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(onReturnPackSizeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel117, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(returnQtyTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addComponent(btnReturnCart, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         viewPanel.add(ViewReturnPanel, "card2");
@@ -5649,6 +5945,57 @@ public class AdminPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton18KeyPressed
 
+    private void onReturnLISTBatchValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_onReturnLISTBatchValueChanged
+        if (onReturnLISTBatch.getSelectedIndex() == -1) {
+            onReturnBatchIDtxt.setText("");
+            onReturnMFDateTxt.setText("");
+            onReturnBatchEXPDateTxt.setText("");
+            onReturnbatchQtyOnHandTxt.setText("");
+            onReturnUnitPriceTxt.setText("");
+            onReturnBatchTxt.setText("");
+            
+        } else {
+            Batch selectedBatch = (Batch) listModelForBatchObjects.get(onReturnLISTBatch.getSelectedIndex());
+            onReturnBatchIDtxt.setText(selectedBatch.getId() + "");
+            onReturnMFDateTxt.setText(selectedBatch.getMFD() + "");
+            onReturnBatchEXPDateTxt.setText(selectedBatch.getEXPD() + "");
+            onReturnbatchQtyOnHandTxt.setText(selectedBatch.getQtyOnHand() + "");
+            onReturnUnitPriceTxt.setText(selectedBatch.getUnitPrice() + "");
+            onReturnBatchTxt.setText(selectedBatch.getBatch());
+            returnQtyTxt.requestFocusInWindow();
+            
+        }
+    }//GEN-LAST:event_onReturnLISTBatchValueChanged
+
+    private void returnQtyTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_returnQtyTxtKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            btnReturnCart.doClick();
+        }
+    }//GEN-LAST:event_returnQtyTxtKeyPressed
+
+    private void btnReturnCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnCartActionPerformed
+        putToReturnCart();
+    }//GEN-LAST:event_btnReturnCartActionPerformed
+
+    private void tableReturnsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableReturnsMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tableReturnsMousePressed
+
+    private void tableReturnsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableReturnsKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tableReturnsKeyPressed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        DefaultTableModel m= (DefaultTableModel) tableReturns.getModel();
+        int rowCount = m.getRowCount();
+        if(rowCount>-1){
+            for (int i = rowCount - 1; i >= 0; i--) {
+                
+            }
+            
+        }
+    }//GEN-LAST:event_jButton19ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -5691,6 +6038,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JPanel DeleteItemPanel;
     private javax.swing.JPanel ItemViewPanel;
     private javax.swing.JTextField OnGRNBatchItemIDtxt;
+    private javax.swing.JTextField OnReturnBatchItemIDtxt;
     private javax.swing.JComboBox<String> SearchedItemsOnUpdateCombo;
     private javax.swing.JPanel UpdateItemPanel;
     private javax.swing.JPanel ViewAllItemPanel;
@@ -5727,6 +6075,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JPanel btnBatchONViewAllItem;
     private javax.swing.JButton btnBrows2;
     private javax.swing.JPanel btnDeleteItemonItem;
+    private javax.swing.JButton btnReturnCart;
     private javax.swing.JPanel btnUpdateItem1;
     private javax.swing.JPanel btnUpdateItem2;
     private javax.swing.JPanel btnUpdateItem3;
@@ -5766,6 +6115,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -5774,6 +6124,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
@@ -5791,7 +6142,18 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel111;
     private javax.swing.JLabel jLabel112;
     private javax.swing.JLabel jLabel113;
+    private javax.swing.JLabel jLabel114;
+    private javax.swing.JLabel jLabel115;
+    private javax.swing.JLabel jLabel116;
+    private javax.swing.JLabel jLabel117;
+    private javax.swing.JLabel jLabel118;
+    private javax.swing.JLabel jLabel119;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel120;
+    private javax.swing.JLabel jLabel121;
+    private javax.swing.JLabel jLabel122;
+    private javax.swing.JLabel jLabel123;
+    private javax.swing.JLabel jLabel124;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -5893,6 +6255,8 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -5907,6 +6271,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel jlabeljhjha;
     private javax.swing.JLabel labelMFFDD;
     private javax.swing.JList<String> listOnBatchUpdate;
@@ -5940,6 +6305,15 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JTextField onGRNbatchQtyOnHandTxt;
     private javax.swing.JTextField onGrnBatchIDtxt;
     private javax.swing.JComboBox<String> onGrnSearchResultCombo;
+    private javax.swing.JTextField onReturnBatchEXPDateTxt;
+    private javax.swing.JTextField onReturnBatchIDtxt;
+    private javax.swing.JTextField onReturnBatchTxt;
+    private javax.swing.JTextField onReturnDescriptionTxt;
+    private javax.swing.JList<String> onReturnLISTBatch;
+    private javax.swing.JTextField onReturnMFDateTxt;
+    private javax.swing.JTextField onReturnPackSizeTxt;
+    private javax.swing.JTextField onReturnUnitPriceTxt;
+    private javax.swing.JTextField onReturnbatchQtyOnHandTxt;
     private javax.swing.JTextField onUpdateBarcodeTxt;
     private javax.swing.JFormattedTextField onUpdateBatchEXPtxt;
     private javax.swing.JTextField onUpdateBatchIdtxt;
@@ -5958,6 +6332,8 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JTextField pathTxt;
     private javax.swing.JButton putToGrnTableButton;
     private javax.swing.JTable reOrderLevelTable;
+    private javax.swing.JTextField returnBarcode;
+    private javax.swing.JTextField returnQtyTxt;
     private javax.swing.JTextField searchByBarcodeForDeleteItemOrBatchTxt;
     private javax.swing.JTextField searchByBarcodeTxtForBatch;
     private javax.swing.JComboBox<String> searchByDescriptionForBatchCombo;
@@ -5967,6 +6343,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JTextField suplierNameTxt;
     private javax.swing.JTable tableGRN;
     private javax.swing.JTable tableItemOrBatchDelete;
+    private javax.swing.JTable tableReturns;
     private javax.swing.JLabel timeLabel;
     private javax.swing.JTable toDayTransactionTable;
     private javax.swing.JLabel todayIncomeLable;
@@ -6015,6 +6392,23 @@ public class AdminPanel extends javax.swing.JFrame {
             public void insertUpdate(DocumentEvent e) {
                 warn();
             }
+        });
+        returnBarcode.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                warn10();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                warn10();
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                warn10();
+            }
+
         });
         searchForDeleteItemByDescriptionTxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -6107,6 +6501,47 @@ public class AdminPanel extends javax.swing.JFrame {
                             i.getReOrderLevel()});
                     }
                     tableItemOrBatchDelete.setModel(model);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+        }
+    }
+    private void warn10(){
+         String barcode = returnBarcode.getText();
+        if (!Validation.validateEmptyTextFeald(barcode)) {
+            ItemService itemService = (ItemService) context.getBean("ItemService");
+            try {
+                Item itemByBarcode = itemService.getItemByBarcode(barcode);
+                if (itemByBarcode == null) {
+                    onReturnPackSizeTxt.setText("");
+                    onReturnDescriptionTxt.setText("");
+                    listModel4.removeAllElements();
+                    listModelForBatchObjects.removeAllElements();
+                    onReturnLISTBatch.setModel(listModel4);
+                    onReturnBatchIDtxt.setText("");
+                    onReturnMFDateTxt.setText("");
+                    onReturnBatchEXPDateTxt.setText("");
+                    onReturnbatchQtyOnHandTxt.setText("");
+                    OnReturnBatchItemIDtxt.setText("");
+                    onReturnUnitPriceTxt.setText("");
+                    onReturnBatchTxt.setText("");
+
+                } else {
+                    List<Batch> allBatches = itemService.getItemsBatchesById(itemByBarcode.getId());
+                    listModel4.removeAllElements();
+                    listModelForBatchObjects.removeAllElements();
+                    if (allBatches != null) {
+                        for (Batch b : allBatches) {
+                            listModel4.addElement(b.getBatch());
+                            listModelForBatchObjects.addElement(b);
+                        }
+                        onReturnLISTBatch.setModel(listModel4);
+                        onReturnPackSizeTxt.setText(itemByBarcode.getPackSize());
+                        onReturnDescriptionTxt.setText(itemByBarcode.getDescription());
+                        OnReturnBatchItemIDtxt.setText(itemByBarcode.getId() + "");
+                    }
+
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex);
@@ -6253,5 +6688,55 @@ public class AdminPanel extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex);
         }
 
+    }
+
+    private void putToReturnCart() {
+        String iId = OnReturnBatchItemIDtxt.getText();
+        String bId = onReturnBatchIDtxt.getText();
+        boolean v1 = Validation.validateEmptyTextFeald(bId);
+        boolean v2 = Validation.validateEmptyTextFeald(iId);
+        if (!v1 && !v2) {
+            String a = returnQtyTxt.getText();
+            boolean matches = a.matches("\\d+(\\.\\d{1,2})?");
+            if (matches) {
+                boolean v3 = Validation.validateEmptyTextFeald(a);
+                if (!v3) {
+                    DefaultTableModel model = (DefaultTableModel) tableReturns.getModel();
+                    int rowCount = model.getRowCount();
+                    int found = -1;
+                    for (int i = rowCount - 1; i >= 0; i--) {
+                        Object val = model.getValueAt(i, 1);
+                        String batchId = val.toString();
+                        if (bId.equalsIgnoreCase(batchId)) {
+                            found = i;
+                        }
+                    }
+                    if (found != -1) {
+                        Object qty = model.getValueAt(found, 5);
+                        String qtyString = qty.toString();
+                        Double addedQty = Double.parseDouble(qtyString);
+                        Double addingQty = Double.parseDouble(a);
+                        Double result = addedQty + addingQty;
+                        model.setValueAt(result.toString(), found, 5);
+                    } else {
+                        model.addRow(new Object[]{
+                            iId,
+                            bId,
+                            onReturnDescriptionTxt.getText(),
+                            onReturnPackSizeTxt.getText(),
+                            onReturnUnitPriceTxt.getText(),
+                            a
+                        });
+                    }
+                    centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+                    tableReturns.setDefaultRenderer(String.class, centerRenderer);
+                    returnBarcode.requestFocusInWindow();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Please Enter Return Quantity");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please Search Item And Select Batch On List");
+        }
     }
 }
