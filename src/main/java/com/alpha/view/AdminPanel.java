@@ -20,6 +20,7 @@ import com.alpha.service.custom.GrnService;
 import com.alpha.service.custom.ItemService;
 import com.alpha.service.custom.OrderService;
 import com.alpha.service.custom.UserService;
+import com.alpha.utils.DBBackUps;
 import com.alpha.utils.Validation;
 import java.awt.Color;
 import java.awt.Frame;
@@ -5568,7 +5569,6 @@ public class AdminPanel extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Can't back up..");
                 }
             } catch (Exception e) {
-                e.printStackTrace();
                 JOptionPane.showMessageDialog(this, e);
             }
         } else {
@@ -5578,7 +5578,7 @@ public class AdminPanel extends javax.swing.JFrame {
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        path = "C:/BackUps/back_up";
+        path = DBBackUps.getStaticPath();
         path = path + "_" + today + ".sql";
         try {
             File f = new File(path);

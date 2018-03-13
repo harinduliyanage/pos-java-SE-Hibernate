@@ -10,5 +10,14 @@ package com.alpha.utils;
  * @author Harindu.sul
  */
 public class DBBackUps {
+    private static String staticPath="D:/sachiya/backUp";
+
+    /**
+     * @return the staticPath
+     */
+    public static String getStaticPath() {
+        return staticPath;
+    }
+
     
 }
