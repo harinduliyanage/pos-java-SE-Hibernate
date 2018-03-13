@@ -44,36 +44,12 @@ public class BillPrintable implements Printable {
             double width = pageFormat.getImageableWidth();
 
             g2d.translate((int) pageFormat.getImageableX(), (int) pageFormat.getImageableY());
-
-            ////////// code by alqama//////////////
-            FontMetrics metrics = g2d.getFontMetrics(new Font("Arial", Font.BOLD, 7));
-            //    int idLength=metrics.stringWidth("000000");
-            //int idLength=metrics.stringWidth("00");
-            int idLength = metrics.stringWidth("000");
-            int amtLength = metrics.stringWidth("000000");
-            int qtyLength = metrics.stringWidth("00000");
-            int priceLength = metrics.stringWidth("000000");
-            int prodLength = (int) width - idLength - amtLength - qtyLength - priceLength - 17;
-
-            //    int idPosition=0;
-            //    int productPosition=idPosition + idLength + 2;
-            //    int pricePosition=productPosition + prodLength +10;
-            //    int qtyPosition=pricePosition + priceLength + 2;
-            //    int amtPosition=qtyPosition + qtyLength + 2;
-            int productPosition = 0;
-            int discountPosition = prodLength + 5;
-            int pricePosition = discountPosition + idLength + 10;
-            int qtyPosition = pricePosition + priceLength + 4;
-            int amtPosition = qtyPosition + qtyLength;
-
             try {
                 /*Draw Header*/
                 int y = 20;
                 int yShift = 10;
                 int headerRectHeight = 15;
                 int headerRectHeighta = 40;
-
-                /**/
                 Set<OrderDetails> all = orderDTO.getOrderDetails();
 
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
@@ -112,7 +88,6 @@ public class BillPrintable implements Printable {
                 }
                 double total = orderDTO.getTotal();
                 String t = total + "";
-
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
                 g2d.drawString("  -------------------------------------", 10, y);
                 y += yShift;
@@ -159,9 +134,6 @@ public class BillPrintable implements Printable {
                 g2d.setFont(new Font("Monospaced", Font.PLAIN, 9));
                 g2d.drawString("  ***************************************", 10, y);
                 y += yShift;
-
-//            g2d.setFont(new Font("Monospaced",Font.BOLD,10));
-//            g2d.drawString("Customer Shopping Invoice", 30,y);y+=yShift; 
             } catch (Exception r) {
                 r.printStackTrace();
             }
