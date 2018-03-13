@@ -9,7 +9,6 @@ import com.alpha.config.Context;
 import com.alpha.dto.OrderDTO;
 import com.alpha.model.OrderDetails;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;

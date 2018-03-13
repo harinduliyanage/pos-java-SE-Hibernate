@@ -10,6 +10,7 @@ import com.alpha.model.Orders;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -80,6 +81,15 @@ public class OrdersDaoImpl implements OrdersDAO {
         crit.add(Restrictions.eq("date", date));
         List list = crit.list();
         return list;
+    }
+
+    @Override
+    public List<Orders> getBetweenTwodayTransaction(LocalDate date, LocalDate day2) throws Exception {
+        SQLQuery sql = sessionFactory
+                .getCurrentSession()
+                .createSQLQuery("select * from orders where (dates BETWEEN '"+date+"' AND '"+day2+"')");
+        sql.addEntity(Orders.class);
+        return (List<Orders>)sql.list();
     }
 
 }

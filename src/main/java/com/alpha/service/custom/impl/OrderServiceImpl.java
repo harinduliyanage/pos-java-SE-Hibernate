@@ -130,4 +130,9 @@ public class OrderServiceImpl implements OrderService {
         return orderDetailsDAO.delete(id);
     }
 
+    @Override
+    public List<Orders> getBetweenTodaysTransaction(LocalDate day1, LocalDate day2) throws Exception {
+       return orderDAO.getBetweenTwodayTransaction(day1,day2);
+    }
+
 }

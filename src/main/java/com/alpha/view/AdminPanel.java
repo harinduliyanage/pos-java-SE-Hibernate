@@ -353,6 +353,7 @@ public class AdminPanel extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         ViewReportsPane = new javax.swing.JPanel();
+        jButton18 = new javax.swing.JButton();
         viewReOrderLevelPanel = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
         reOrderLevelTable = new javax.swing.JTable();
@@ -2566,15 +2567,36 @@ public class AdminPanel extends javax.swing.JFrame {
 
         ViewReportsPane.setBackground(new java.awt.Color(255, 255, 255));
 
+        jButton18.setBackground(new java.awt.Color(51, 51, 51));
+        jButton18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton18.setForeground(new java.awt.Color(255, 255, 255));
+        jButton18.setText("Get Income between two days");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
+        jButton18.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton18KeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ViewReportsPaneLayout = new javax.swing.GroupLayout(ViewReportsPane);
         ViewReportsPane.setLayout(ViewReportsPaneLayout);
         ViewReportsPaneLayout.setHorizontalGroup(
             ViewReportsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1130, Short.MAX_VALUE)
+            .addGroup(ViewReportsPaneLayout.createSequentialGroup()
+                .addGap(111, 111, 111)
+                .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(674, Short.MAX_VALUE))
         );
         ViewReportsPaneLayout.setVerticalGroup(
             ViewReportsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 614, Short.MAX_VALUE)
+            .addGroup(ViewReportsPaneLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(404, Short.MAX_VALUE))
         );
 
         viewPanel.add(ViewReportsPane, "card2");
@@ -5614,6 +5636,18 @@ public class AdminPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton12KeyPressed
 
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        GetIncomeGivenTwoDaysFrame i = new GetIncomeGivenTwoDaysFrame();
+        i.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        i.setVisible(true);
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton18KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton18KeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            jButton18.doClick();
+        }
+    }//GEN-LAST:event_jButton18KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -5730,6 +5764,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

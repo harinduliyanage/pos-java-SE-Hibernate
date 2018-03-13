@@ -20,5 +20,6 @@ public interface OrderService extends SuperService<Orders>{
     public int addOrder(OrderDTO orderDTO)throws Exception;
     public boolean deleteOrderDetail(int id,Orders s,int batchId,double orderQty)throws Exception;
     public List<Orders> getTodayTransaction(LocalDate localDate)throws Exception;
+    public List<Orders> getBetweenTodaysTransaction(LocalDate day1,LocalDate day2)throws Exception;
     public List<OrderDetails> getOrderDetailsByOrderId(int id)throws Exception;
 }

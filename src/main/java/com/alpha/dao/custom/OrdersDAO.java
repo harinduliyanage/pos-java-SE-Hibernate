@@ -17,5 +17,6 @@ import org.joda.time.LocalDate;
 public interface OrdersDAO extends SuperDAO<Orders>{
     public int addOrder(Orders o)throws Exception;
     public List<Orders> getTodayTransaction(LocalDate date) throws Exception;
+    public List<Orders> getBetweenTwodayTransaction(LocalDate date,LocalDate day2) throws Exception;
 
 }
