@@ -93,3 +93,4 @@ public class OrdersDaoImpl implements OrdersDAO {
     }
 
 }
+//SELECT batch_id, GROUP_CONCAT(orderOTY SEPARATOR ' ') FROM order_details GROUP BY batch_id;
