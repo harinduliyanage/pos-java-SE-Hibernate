@@ -78,6 +78,11 @@ public class Welcome extends javax.swing.JFrame {
         passwordTxt.setForeground(new java.awt.Color(51, 51, 51));
         passwordTxt.setToolTipText("Password");
         passwordTxt.setBorder(null);
+        passwordTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordTxtKeyPressed(evt);
+            }
+        });
 
         jSeparator1.setForeground(new java.awt.Color(51, 51, 51));
 
@@ -241,7 +246,7 @@ public class Welcome extends javax.swing.JFrame {
             pnl_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_backgroundLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -349,6 +354,12 @@ public class Welcome extends javax.swing.JFrame {
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void passwordTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTxtKeyPressed
+        if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
+            btnLogIn.doClick();
+        }
+    }//GEN-LAST:event_passwordTxtKeyPressed
 
     /**
      * @param args the command line arguments

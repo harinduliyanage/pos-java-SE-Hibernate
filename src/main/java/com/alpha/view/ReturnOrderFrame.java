@@ -518,6 +518,11 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
                         totalLable.setText("");
                         discountLable.setText("");
                         subTotLable.setText("");
+                        DefaultTableModel m = (DefaultTableModel) updateOrderTable.getModel();
+                        int rowCount = m.getRowCount();
+                        for (int i = rowCount - 1; i >= 0; i--) {
+                            m.removeRow(i);
+                        }
                     }
 
                 } else {
@@ -543,10 +548,12 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
     }
 
     private void deleteOrder() {
-
+        OrderService orderService = (OrderService) context.getBean("OrderService");
         DefaultTableModel m = (DefaultTableModel) updateOrderTable.getModel();
         int rowCount = m.getRowCount();
-        if (rowCount >= 1) {
+        if(rowCount>-1){
+            Object valueAt11 = m.getValueAt(0, 1);
+            try {
             for (int i = rowCount - 1; i >= 0; i--) {
                 Object valueAt0 = m.getValueAt(i, 0);
                 Object valueAt1 = m.getValueAt(i, 1);
@@ -564,38 +571,33 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
                 double price = unitPrice * qty;
                 String orderDetails = valueAt0.toString();
                 int oDID = Integer.parseInt(orderDetails);
-                OrderService orderService = (OrderService) context.getBean("OrderService");
-                try {
-                    Orders s = orderService.search(Integer.parseInt(valueAt1.toString()));
-                    double oldDis = s.getDiscounts();
-                    double total = s.getTotal();
-                    double subTot = s.getSubTot();
-                    total = total - price;
-                    oldDis = oldDis - res;
-                    subTot = total - oldDis;
-                    s.setTotal(total);
-                    s.setDiscounts(oldDis);
-                    s.setSubTot(subTot);
-                    if (rowCount == 1) {
-                        orderService.deleteOrderDetail(oDID, s, batchId, qty);
-                        orderService.delete(Integer.parseInt(valueAt1.toString()));
-                        setOrder();
-                    } else {
-                        orderService.deleteOrderDetail(oDID, s, batchId, qty);
-                        setOrder();
-                    }
-                } catch (Exception ex) {
-                    Logger.getLogger(ReturnOrderFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(this, ex);
+                Orders s = orderService.search(Integer.parseInt(valueAt1.toString()));
+                double oldDis = s.getDiscounts();
+                double total = s.getTotal();
+                double subTot = s.getSubTot();
+                total = total - price;
+                oldDis = oldDis - res;
+                subTot = total - oldDis;
+                s.setTotal(total);
+                s.setDiscounts(oldDis);
+                s.setSubTot(subTot);
+                if (rowCount == 1) {
+                    orderService.deleteOrderDetail(oDID, s, batchId, qty);
+                } else {
+                    orderService.deleteOrderDetail(oDID, s, batchId, qty);
                 }
-                m.removeRow(i);
             }
+            orderService.delete(Integer.parseInt(valueAt11.toString()));
+            setOrder();
             dateLable.setText("");
             timeLable.setText("");
             totalLable.setText("");
             discountLable.setText("");
             subTotLable.setText("");
+        } catch (Exception ex) {
+            Logger.getLogger(ReturnOrderFrame.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex);
         }
-
+        }
     }
 }

@@ -5258,7 +5258,7 @@ public class AdminPanel extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         int rowCount = tableGRN.getRowCount();
-        if (rowCount != -1) {
+        if (rowCount >0) {
             String supplier = suplierNameTxt.getText();
             boolean v1 = Validation.validateEmptyTextFeald(supplier);
             if (!v1) {
@@ -5569,6 +5569,7 @@ public class AdminPanel extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Can't back up..");
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(this, e);
             }
         } else {
