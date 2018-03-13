@@ -5554,7 +5554,7 @@ public class AdminPanel extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         int rowCount = tableGRN.getRowCount();
-        if (rowCount >0) {
+        if (rowCount > 0) {
             String supplier = suplierNameTxt.getText();
             boolean v1 = Validation.validateEmptyTextFeald(supplier);
             if (!v1) {
@@ -5940,7 +5940,7 @@ public class AdminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton18KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton18KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             jButton18.doClick();
         }
     }//GEN-LAST:event_jButton18KeyPressed
@@ -5953,7 +5953,7 @@ public class AdminPanel extends javax.swing.JFrame {
             onReturnbatchQtyOnHandTxt.setText("");
             onReturnUnitPriceTxt.setText("");
             onReturnBatchTxt.setText("");
-            
+
         } else {
             Batch selectedBatch = (Batch) listModelForBatchObjects.get(onReturnLISTBatch.getSelectedIndex());
             onReturnBatchIDtxt.setText(selectedBatch.getId() + "");
@@ -5963,12 +5963,12 @@ public class AdminPanel extends javax.swing.JFrame {
             onReturnUnitPriceTxt.setText(selectedBatch.getUnitPrice() + "");
             onReturnBatchTxt.setText(selectedBatch.getBatch());
             returnQtyTxt.requestFocusInWindow();
-            
+
         }
     }//GEN-LAST:event_onReturnLISTBatchValueChanged
 
     private void returnQtyTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_returnQtyTxtKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnReturnCart.doClick();
         }
     }//GEN-LAST:event_returnQtyTxtKeyPressed
@@ -5986,13 +5986,44 @@ public class AdminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_tableReturnsKeyPressed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        DefaultTableModel m= (DefaultTableModel) tableReturns.getModel();
+        DefaultTableModel m = (DefaultTableModel) tableReturns.getModel();
+        BatchService batchService = (BatchService) context.getBean("BatchService");
         int rowCount = m.getRowCount();
-        if(rowCount>-1){
+        
+        if (rowCount > -1) {
             for (int i = rowCount - 1; i >= 0; i--) {
-                
+                Object batchValue = m.getValueAt(i, 1);
+                String batchId = batchValue.toString();
+                Object qtyValue = m.getValueAt(i, 5);
+                String returnQty = qtyValue.toString();
+                try {
+                    BatchDTO search = batchService.search(Integer.parseInt(batchId));
+                    double qtyOnHand = search.getQtyOnHand();
+                    double returns = Double.parseDouble(returnQty);
+                    qtyOnHand=qtyOnHand-returns;
+                    search.setQtyOnHand(qtyOnHand);
+                    batchService.update(search);
+                    
+                } catch (Exception ex) {
+                    Logger.getLogger(AdminPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
-            
+            for (int i = rowCount - 1; i >= 0; i--) {
+                m.removeRow(i);
+            }
+            onReturnBatchIDtxt.setText("");
+            onReturnMFDateTxt.setText("");
+            onReturnBatchEXPDateTxt.setText("");
+            onReturnbatchQtyOnHandTxt.setText("");
+            onReturnUnitPriceTxt.setText("");
+            onReturnBatchTxt.setText("");
+            onReturnPackSizeTxt.setText("");
+            returnQtyTxt.setText("");
+            OnReturnBatchItemIDtxt.setText("");
+            onReturnDescriptionTxt.setText("");
+            returnBarcode.requestFocusInWindow();
+            onReturnLISTBatch.removeAll();
         }
     }//GEN-LAST:event_jButton19ActionPerformed
 
@@ -6507,8 +6538,9 @@ public class AdminPanel extends javax.swing.JFrame {
             }
         }
     }
-    private void warn10(){
-         String barcode = returnBarcode.getText();
+
+    private void warn10() {
+        String barcode = returnBarcode.getText();
         if (!Validation.validateEmptyTextFeald(barcode)) {
             ItemService itemService = (ItemService) context.getBean("ItemService");
             try {
