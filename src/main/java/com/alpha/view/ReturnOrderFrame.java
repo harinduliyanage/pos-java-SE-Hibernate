@@ -131,6 +131,11 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
                 btnDeleteFocusLost(evt);
             }
         });
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
         btnDelete.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnDeleteKeyPressed(evt);
@@ -327,6 +332,9 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_END) {
             btnDelete.requestFocusInWindow();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnDelete.doClick();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             orderIdTxt2.requestFocusInWindow();
         }
@@ -341,6 +349,10 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
         btnDelete.setBackground(new Color(204, 0, 0));
         btnDelete.setForeground(Color.white);
     }//GEN-LAST:event_btnDeleteFocusLost
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        deleteOrder();
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -528,5 +540,62 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
             Logger.getLogger(ReturnOrderFrame.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex);
         }
+    }
+
+    private void deleteOrder() {
+
+        DefaultTableModel m = (DefaultTableModel) updateOrderTable.getModel();
+        int rowCount = m.getRowCount();
+        if (rowCount >= 1) {
+            for (int i = rowCount - 1; i >= 0; i--) {
+                Object valueAt0 = m.getValueAt(i, 0);
+                Object valueAt1 = m.getValueAt(i, 1);
+                Object valueAt2 = m.getValueAt(i, 2);
+                Object valueAt6 = m.getValueAt(i, 6);
+                Object valueAt7 = m.getValueAt(i, 7);
+                Object valueAt8 = m.getValueAt(i, 8);
+                Object valueAt9 = m.getValueAt(i, 9);
+                int batchId = Integer.parseInt(valueAt2.toString());
+                double storeDis = Double.parseDouble(valueAt6.toString());
+                double comDis = Double.parseDouble(valueAt7.toString());
+                double unitPrice = Double.parseDouble(valueAt8.toString());
+                double qty = Double.parseDouble(valueAt9.toString());
+                double res = comDis + storeDis;
+                double price = unitPrice * qty;
+                String orderDetails = valueAt0.toString();
+                int oDID = Integer.parseInt(orderDetails);
+                OrderService orderService = (OrderService) context.getBean("OrderService");
+                try {
+                    Orders s = orderService.search(Integer.parseInt(valueAt1.toString()));
+                    double oldDis = s.getDiscounts();
+                    double total = s.getTotal();
+                    double subTot = s.getSubTot();
+                    total = total - price;
+                    oldDis = oldDis - res;
+                    subTot = total - oldDis;
+                    s.setTotal(total);
+                    s.setDiscounts(oldDis);
+                    s.setSubTot(subTot);
+                    if (rowCount == 1) {
+                        orderService.deleteOrderDetail(oDID, s, batchId, qty);
+                        orderService.delete(Integer.parseInt(valueAt1.toString()));
+                        setOrder();
+                    } else {
+                        orderService.deleteOrderDetail(oDID, s, batchId, qty);
+                        setOrder();
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(ReturnOrderFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, ex);
+                }
+                m.removeRow(i);
+            }
+            dateLable.setText("");
+            timeLable.setText("");
+            totalLable.setText("");
+            discountLable.setText("");
+            subTotLable.setText("");
+        }
+
     }
 }
