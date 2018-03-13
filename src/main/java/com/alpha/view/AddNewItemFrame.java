@@ -352,7 +352,7 @@ public class AddNewItemFrame extends javax.swing.JFrame {
                                     addItemMFDTxt.setText("");
                                     addItemQtyOnHandTxt.setText("");
                                     addItemUnitPriceTxt.setText("");
-                                    addItembarcodeTxt.setRequestFocusEnabled(true);
+                                    addItembarcodeTxt.requestFocusInWindow();
                                 } else {
                                     JOptionPane.showMessageDialog(this, "Item Added Faild..");
                                     addItembarcodeTxt.setText("");
@@ -364,7 +364,7 @@ public class AddNewItemFrame extends javax.swing.JFrame {
                                     addItemMFDTxt.setText("");
                                     addItemQtyOnHandTxt.setText("");
                                     addItemUnitPriceTxt.setText("");
-                                    addItembarcodeTxt.setRequestFocusEnabled(true);
+                                    addItembarcodeTxt.requestFocusInWindow();
                                 }
                             }
                         } catch (Exception ex) {
