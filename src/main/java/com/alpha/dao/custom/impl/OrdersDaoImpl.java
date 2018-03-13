@@ -51,7 +51,7 @@ public class OrdersDaoImpl implements OrdersDAO {
 
     @Override
     public Orders search(int id) throws Exception {
-        return (Orders) sessionFactory.getCurrentSession().load(Orders.class, id);
+        return (Orders) sessionFactory.getCurrentSession().get(Orders.class, id);
 
     }
 

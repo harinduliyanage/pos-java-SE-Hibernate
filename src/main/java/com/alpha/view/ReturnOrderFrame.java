@@ -30,7 +30,7 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
 
     public ReturnOrderFrame() {
         initComponents();
-        AdminPassTxt22.requestFocusInWindow();
+        orderIdTxt2.requestFocusInWindow();
         this.context = Context.getInstance();
     }
 
@@ -160,45 +160,42 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(193, 193, 193)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(193, 193, 193)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 988, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(222, 222, 222)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(30, 30, 30))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)))
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(AdminPassTxt22, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(orderIdTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(AdminPassTxt22, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(45, 45, 45)
+                        .addComponent(orderIdTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(327, 327, 327))
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1003, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(orderIdTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AdminPassTxt22, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(orderIdTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
@@ -214,7 +211,7 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -235,6 +232,19 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void orderIdTxt2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_orderIdTxt2KeyPressed
+
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            updateOrderTable.requestFocusInWindow();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_END) {
+            btnDelete.requestFocusInWindow();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            btnUpdate.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_orderIdTxt2KeyPressed
+
+    private void AdminPassTxt22KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AdminPassTxt22KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String pass = AdminPassTxt22.getText();
             OrderService orderService = (OrderService) context.getBean("OrderService");
@@ -257,11 +267,23 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
                                 }
 
                                 for (OrderDetails o : all) {
-                                    m.addRow(new Object[]{o.getId()+"",
-                                    orderId+"",
-                                    o.getBatch()});
+                                    m.addRow(new Object[]{
+                                        o.getId() + "",
+                                        orderId + "",
+                                        o.getBatch().getId() + "",
+                                        search.getDate() + "",
+                                        search.getTime() + "",
+                                        o.getDescription(),
+                                        o.getDiscount() + "0",
+                                        o.getComDiscount() + "0",
+                                        o.getUnitPrice() + "0",
+                                        o.getOrderOTY() + "0"
+                                    });
                                 }
+                                updateOrderTable.setModel(m);
                             }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Can not Found Order");
                         }
 
                     } else {
@@ -269,6 +291,11 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "Admin Password Incorect..");
+                    DefaultTableModel m = (DefaultTableModel) updateOrderTable.getModel();
+                    int rowCount = m.getRowCount();
+                    for (int i = rowCount - 1; i >= 0; i--) {
+                        m.removeRow(i);
+                    }
                 }
             } catch (Exception ex) {
                 Logger.getLogger(ReturnOrderFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -276,18 +303,6 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
             }
 
         }
-        if (evt.getKeyCode() == KeyEvent.VK_F1) {
-            updateOrderTable.requestFocusInWindow();
-        }
-        if (evt.getKeyCode() == KeyEvent.VK_END) {
-            btnDelete.requestFocusInWindow();
-        }
-        if (evt.getKeyCode() == KeyEvent.VK_F2) {
-            btnUpdate.requestFocusInWindow();
-        }
-    }//GEN-LAST:event_orderIdTxt2KeyPressed
-
-    private void AdminPassTxt22KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AdminPassTxt22KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             updateOrderTable.requestFocusInWindow();
         }
@@ -310,7 +325,7 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
             btnUpdate.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            AdminPassTxt22.requestFocusInWindow();
+            orderIdTxt2.requestFocusInWindow();
         }
     }//GEN-LAST:event_updateOrderTableKeyPressed
 
@@ -325,7 +340,7 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
             btnUpdate.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            AdminPassTxt22.requestFocusInWindow();
+            orderIdTxt2.requestFocusInWindow();
         }
     }//GEN-LAST:event_btnDeleteKeyPressed
 
@@ -340,7 +355,7 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
             btnUpdate.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            AdminPassTxt22.requestFocusInWindow();
+            orderIdTxt2.requestFocusInWindow();
         }
     }//GEN-LAST:event_btnUpdateKeyPressed
 
@@ -381,8 +396,6 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField AdminPassTxt22;
-    private javax.swing.JTable availableBatchCashierTable;
-    private javax.swing.JTable availableBatchCashierTable1;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
@@ -392,8 +405,6 @@ public class ReturnOrderFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField orderIdTxt2;
     private javax.swing.JTable updateOrderTable;

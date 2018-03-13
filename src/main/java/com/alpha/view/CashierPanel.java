@@ -153,7 +153,7 @@ public class CashierPanel extends javax.swing.JFrame {
         givenMoneyTxt = new javax.swing.JFormattedTextField();
         balanceLable = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btn_returnorder = new javax.swing.JButton();
         logOut = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
         DateLable = new javax.swing.JLabel();
@@ -553,13 +553,21 @@ public class CashierPanel extends javax.swing.JFrame {
         jLabel20.setForeground(new java.awt.Color(51, 51, 51));
         jLabel20.setText("Balance        :");
 
-        jButton1.setBackground(new java.awt.Color(51, 51, 51));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Return Order");
-        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+        btn_returnorder.setBackground(new java.awt.Color(51, 51, 51));
+        btn_returnorder.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_returnorder.setForeground(new java.awt.Color(255, 255, 255));
+        btn_returnorder.setText("Return Order");
+        btn_returnorder.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btn_returnorderFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btn_returnorderFocusLost(evt);
+            }
+        });
+        btn_returnorder.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton1KeyPressed(evt);
+                btn_returnorderKeyPressed(evt);
             }
         });
 
@@ -587,7 +595,6 @@ public class CashierPanel extends javax.swing.JFrame {
                                         .addGroup(backGroundPanelLayout.createSequentialGroup()
                                             .addGap(102, 102, 102)
                                             .addComponent(subTotLable, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(0, 0, 0)
                         .addGroup(backGroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(backGroundPanelLayout.createSequentialGroup()
                                 .addGroup(backGroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -596,8 +603,7 @@ public class CashierPanel extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(backGroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(cashierBatchUnitPriceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cashierStoreDiscountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(cashierStoreDiscountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(backGroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -625,7 +631,10 @@ public class CashierPanel extends javax.swing.JFrame {
                                                     .addComponent(jLabel14)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                     .addComponent(cashierItemIDTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                            .addComponent(jLabel12)))
+                            .addComponent(jLabel12)
+                            .addGroup(backGroundPanelLayout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(btn_returnorder, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(backGroundPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(backGroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -702,7 +711,7 @@ public class CashierPanel extends javax.swing.JFrame {
                                 .addComponent(jLabel11)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(backGroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_returnorder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_put_To_Cart, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
                         .addGroup(backGroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -801,6 +810,9 @@ public class CashierPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_cashierCompantyTxtFocusGained
 
     private void orderQtyTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_orderQtyTxtKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String val = orderQtyTxt.getText();
             String val2 = cashierQtyOnHandTxt.getText();
@@ -872,6 +884,9 @@ public class CashierPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_put_To_CartMouseExited
 
     private void cashierSearchResultComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierSearchResultComboKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             int index = cashierSearchResultCombo.getSelectedIndex();
             if (index >= 0) {
@@ -948,6 +963,9 @@ public class CashierPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_cashierSearchResultComboKeyPressed
 
     private void cashierStoreDiscountTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierStoreDiscountTxtKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String val = orderQtyTxt.getText();
             String val2 = cashierQtyOnHandTxt.getText();
@@ -985,6 +1003,9 @@ public class CashierPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_cashierStoreDiscountTxtKeyPressed
 
     private void cashierCompantyTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierCompantyTxtKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String val = orderQtyTxt.getText();
             String val2 = cashierQtyOnHandTxt.getText();
@@ -1045,6 +1066,9 @@ public class CashierPanel extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
             cashdrawerOpen();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
 
     }//GEN-LAST:event_orderDetailsTableKeyPressed
 
@@ -1054,6 +1078,9 @@ public class CashierPanel extends javax.swing.JFrame {
 
     private void btnPlaceOrderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPlaceOrderKeyPressed
         DefaultTableModel m = (DefaultTableModel) orderDetailsTable.getModel();
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (m.getRowCount() != -1) {
                 placeOrder();
@@ -1086,6 +1113,9 @@ public class CashierPanel extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             orderDetailsTable.requestFocusInWindow();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
             cashdrawerOpen();
         }
@@ -1100,6 +1130,9 @@ public class CashierPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_cashierBarcodeTxtKeyPressed
 
     private void cashierSearchByDescriptionTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierSearchByDescriptionTxtKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             orderDetailsTable.requestFocusInWindow();
         }
@@ -1117,6 +1150,9 @@ public class CashierPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_cashierSearchByDescriptionTxtKeyPressed
 
     private void cashierDescriptionTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierDescriptionTxtKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             orderDetailsTable.requestFocusInWindow();
         }
@@ -1134,6 +1170,9 @@ public class CashierPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_cashierDescriptionTxtKeyPressed
 
     private void casherPackSizeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_casherPackSizeKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             orderDetailsTable.requestFocusInWindow();
         }
@@ -1165,9 +1204,15 @@ public class CashierPanel extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_F5) {
             cashdrawerOpen();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
     }//GEN-LAST:event_cashierBatchNametxtKeyPressed
 
     private void batchIdTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_batchIdTxtKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             orderDetailsTable.requestFocusInWindow();
         }
@@ -1185,6 +1230,9 @@ public class CashierPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_batchIdTxtKeyPressed
 
     private void cashierItemIDTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierItemIDTxtKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             orderDetailsTable.requestFocusInWindow();
         }
@@ -1202,6 +1250,9 @@ public class CashierPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_cashierItemIDTxtKeyPressed
 
     private void cashierBatchExpDateTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierBatchExpDateTxtKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             orderDetailsTable.requestFocusInWindow();
         }
@@ -1219,6 +1270,9 @@ public class CashierPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_cashierBatchExpDateTxtKeyPressed
 
     private void cashierBatchUnitPriceTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierBatchUnitPriceTxtKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             orderDetailsTable.requestFocusInWindow();
         }
@@ -1236,6 +1290,9 @@ public class CashierPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_cashierBatchUnitPriceTxtKeyPressed
 
     private void cashierQtyOnHandTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cashierQtyOnHandTxtKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
             orderDetailsTable.requestFocusInWindow();
         }
@@ -1261,8 +1318,8 @@ public class CashierPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPlaceOrderFocusLost
 
     private void givenMoneyTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_givenMoneyTxtKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_F1) {
-            orderDetailsTable.requestFocusInWindow();
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
         }
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!grossTotalLable.getText().equalsIgnoreCase("0.00")) {
@@ -1282,15 +1339,45 @@ public class CashierPanel extends javax.swing.JFrame {
             cashierBarcodeTxt.selectAll();
             cashierBarcodeTxt.requestFocusInWindow();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            orderDetailsTable.requestFocusInWindow();
+        }
     }//GEN-LAST:event_givenMoneyTxtKeyPressed
 
-    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+    private void btn_returnorderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_returnorderKeyPressed
         if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
             ReturnOrderFrame r = new ReturnOrderFrame();
             r.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            r.setVisible(true);
+            r.setVisible(true);            
         }
-    }//GEN-LAST:event_jButton1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_F12) {
+            btn_returnorder.requestFocusInWindow();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            cashdrawerOpen();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_END) {
+            givenMoneyTxt.requestFocusInWindow();
+            givenMoneyTxt.select(0, 1);
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            cashierBarcodeTxt.selectAll();
+            cashierBarcodeTxt.requestFocusInWindow();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            orderDetailsTable.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_btn_returnorderKeyPressed
+
+    private void btn_returnorderFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btn_returnorderFocusGained
+        btn_returnorder.setBackground(Color.WHITE);
+        btn_returnorder.setForeground(Color.BLACK);
+    }//GEN-LAST:event_btn_returnorderFocusGained
+
+    private void btn_returnorderFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btn_returnorderFocusLost
+        btn_returnorder.setBackground(new Color(51, 51, 51));
+        btn_returnorder.setForeground(Color.white);
+    }//GEN-LAST:event_btn_returnorderFocusLost
 
     /**
      * @param args the command line arguments
@@ -1337,6 +1424,7 @@ public class CashierPanel extends javax.swing.JFrame {
     private javax.swing.JTextField batchIdTxt;
     private javax.swing.JButton btnPlaceOrder;
     private javax.swing.JButton btn_put_To_Cart;
+    private javax.swing.JButton btn_returnorder;
     private javax.swing.JTextField casherPackSize;
     private javax.swing.JTextField cashierBarcodeTxt;
     private javax.swing.JTextField cashierBatchExpDateTxt;
@@ -1353,7 +1441,6 @@ public class CashierPanel extends javax.swing.JFrame {
     private javax.swing.JLabel disCountLable;
     private javax.swing.JFormattedTextField givenMoneyTxt;
     private javax.swing.JLabel grossTotalLable;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

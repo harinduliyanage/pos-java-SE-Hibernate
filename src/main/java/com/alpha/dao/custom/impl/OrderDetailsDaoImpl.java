@@ -5,14 +5,15 @@
  */
 package com.alpha.dao.custom.impl;
 
+import com.alpha.dao.custom.BatchDAO;
 import com.alpha.dao.custom.OrderDetailsDAO;
+import com.alpha.model.Batch;
 import com.alpha.model.OrderDetails;
 import java.io.Serializable;
 import java.util.List;
-import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,9 +22,13 @@ import org.springframework.stereotype.Repository;
  * @author Harindu.sul
  */
 @Repository("OrderDetailsDAO")
-public class OrderDetailsDaoImpl implements OrderDetailsDAO{
+public class OrderDetailsDaoImpl implements OrderDetailsDAO {
+
     @Autowired
     SessionFactory sessionFactory;
+    
+    @Autowired
+    BatchDAO batchDAO;
 
     @Override
     public boolean add(OrderDetails t) throws Exception {
@@ -44,7 +49,7 @@ public class OrderDetailsDaoImpl implements OrderDetailsDAO{
 
     @Override
     public boolean update(OrderDetails t) throws Exception {
-         sessionFactory.getCurrentSession().update(t);
+        sessionFactory.getCurrentSession().update(t);
         return true;
     }
 
@@ -64,8 +69,13 @@ public class OrderDetailsDaoImpl implements OrderDetailsDAO{
         SQLQuery sql = sessionFactory.getCurrentSession().createSQLQuery("select*from order_details where order_id='"+id+"'");
         sql.addEntity(OrderDetails.class);
         List<OrderDetails> list = sql.list();
+        Hibernate.isInitialized(list);
+        for (OrderDetails o : list) {
+            Batch search = batchDAO.search(o.getBatch().getId());
+            o.setBatch(search);
+        }
         return list;
+
     }
-    
-    
+
 }
