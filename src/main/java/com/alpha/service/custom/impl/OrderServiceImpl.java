@@ -13,6 +13,7 @@ import com.alpha.model.Batch;
 import com.alpha.model.OrderDetails;
 import com.alpha.model.Orders;
 import com.alpha.service.custom.OrderService;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import javax.transaction.Transactional;
@@ -72,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Orders> getAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return orderDAO.getAll();
     }
 
     @Override
@@ -133,6 +134,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Orders> getBetweenTodaysTransaction(LocalDate day1, LocalDate day2) throws Exception {
        return orderDAO.getBetweenTwodayTransaction(day1,day2);
+    }
+
+    @Override
+    public HashMap<String, Integer> getPassMoveItems() throws Exception {
+        return orderDAO.getPassMoveItems();
     }
 
 }
