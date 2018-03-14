@@ -141,4 +141,9 @@ public class OrderServiceImpl implements OrderService {
         return orderDAO.getPassMoveItems();
     }
 
+    @Override
+    public List<Orders> getLast500_OrderDetails() throws Exception {
+        return orderDAO.getLast500_OrderDetails();
+    }
+
 }

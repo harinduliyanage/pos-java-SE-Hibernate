@@ -20,5 +20,6 @@ public interface OrdersDAO extends SuperDAO<Orders>{
     public List<Orders> getTodayTransaction(LocalDate date) throws Exception;
     public List<Orders> getBetweenTwodayTransaction(LocalDate date,LocalDate day2) throws Exception;
     public HashMap<String,Double> getPassMoveItems()throws Exception;
+    public List<Orders> getLast500_OrderDetails()throws Exception;
 
 }

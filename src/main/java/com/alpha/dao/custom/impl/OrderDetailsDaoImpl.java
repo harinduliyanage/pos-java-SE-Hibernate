@@ -26,7 +26,7 @@ public class OrderDetailsDaoImpl implements OrderDetailsDAO {
 
     @Autowired
     SessionFactory sessionFactory;
-    
+
     @Autowired
     BatchDAO batchDAO;
 

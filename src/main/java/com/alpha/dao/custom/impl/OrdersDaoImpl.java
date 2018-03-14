@@ -109,4 +109,13 @@ public class OrdersDaoImpl implements OrdersDAO {
         }
         return map;
     }
+
+    @Override
+    public List<Orders> getLast500_OrderDetails() throws Exception {
+        return (List<Orders>)sessionFactory.
+                getCurrentSession()
+                .createCriteria(Orders.class)
+                .addOrder(Order.desc("id"))
+                .setMaxResults(500).list();
+    }
 }
