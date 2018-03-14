@@ -8,7 +8,6 @@ package com.alpha.dao.custom.impl;
 import com.alpha.dao.custom.GrnDAO;
 import com.alpha.model.Grn;
 import java.io.Serializable;
-import java.sql.Statement;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;

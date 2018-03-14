@@ -6,19 +6,16 @@
 package com.alpha.dao.custom.impl;
 
 import com.alpha.dao.custom.OrdersDAO;
-import com.alpha.model.OrderDetails;
 import com.alpha.model.Orders;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import javax.persistence.Entity;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
