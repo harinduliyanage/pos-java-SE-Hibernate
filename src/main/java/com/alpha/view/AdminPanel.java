@@ -5977,6 +5977,9 @@ public class AdminPanel extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnReturnCart.doClick();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            tableReturns.requestFocusInWindow();
+        }
     }//GEN-LAST:event_returnQtyTxtKeyPressed
 
     private void btnReturnCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnCartActionPerformed
@@ -5988,7 +5991,16 @@ public class AdminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_tableReturnsMousePressed
 
     private void tableReturnsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableReturnsKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode()==KeyEvent.VK_DELETE) {
+            int selectedRow = tableReturns.getSelectedRow();
+            if(selectedRow > -1){
+                DefaultTableModel m=(DefaultTableModel) tableReturns.getModel();
+                m.removeRow(selectedRow);
+                tableReturns.setModel(m);
+            }else{
+                JOptionPane.showMessageDialog(this, "Please Select Deleting Row");
+            } 
+        }
     }//GEN-LAST:event_tableReturnsKeyPressed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
@@ -6796,11 +6808,15 @@ public class AdminPanel extends javax.swing.JFrame {
         boolean v2 = Validation.validateEmptyTextFeald(iId);
         if (!v1 && !v2) {
             String a = returnQtyTxt.getText();
+            String b = onReturnbatchQtyOnHandTxt.getText();
             boolean matches = a.matches("\\d+(\\.\\d{1,2})?");
             if (matches) {
                 boolean v3 = Validation.validateEmptyTextFeald(a);
+                double reqty = Double.parseDouble(a);
+                double qtyOnHand = Double.parseDouble(b);
                 if (!v3) {
-                    DefaultTableModel model = (DefaultTableModel) tableReturns.getModel();
+                   if(reqty<qtyOnHand){
+                       DefaultTableModel model = (DefaultTableModel) tableReturns.getModel();
                     int rowCount = model.getRowCount();
                     int found = -1;
                     for (int i = rowCount - 1; i >= 0; i--) {
@@ -6830,6 +6846,9 @@ public class AdminPanel extends javax.swing.JFrame {
                     centerRenderer.setHorizontalAlignment(JLabel.CENTER);
                     tableReturns.setDefaultRenderer(String.class, centerRenderer);
                     returnBarcode.requestFocusInWindow();
+                   }else{
+                       JOptionPane.showMessageDialog(this, "This Batch Have only '"+b+"0' Items in Stock");
+                   }
                 } else {
                     JOptionPane.showMessageDialog(this, "Please Enter Return Quantity");
                 }
