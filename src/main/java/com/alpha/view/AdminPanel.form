@@ -5032,9 +5032,9 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel114" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField2" min="-2" pref="250" max="-2" attributes="0"/>
+                                  <Component id="onReturnsSearchDesTxt" min="-2" pref="250" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jComboBox1" min="-2" pref="275" max="-2" attributes="0"/>
+                                  <Component id="onReturnsCombo" min="-2" pref="275" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -5057,9 +5057,9 @@
                                   <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jComboBox1" min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Component id="onReturnsCombo" min="-2" pref="26" max="-2" attributes="0"/>
                                   <Component id="jLabel108" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
-                                  <Component id="jTextField2" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Component id="onReturnsSearchDesTxt" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
                                   <Component id="jLabel114" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -5144,7 +5144,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="returnBarcode">
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField2">
+                <Component class="javax.swing.JTextField" name="onReturnsSearchDesTxt">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel114">
                   <Properties>
@@ -5154,12 +5154,15 @@
                     <Property name="text" type="java.lang.String" value="Description"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox1">
+                <Component class="javax.swing.JComboBox" name="onReturnsCombo">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="0"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="onReturnsComboItemStateChanged"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>

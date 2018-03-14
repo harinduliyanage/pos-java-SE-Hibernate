@@ -402,9 +402,9 @@ public class AdminPanel extends javax.swing.JFrame {
         ViewReturnPanel = new javax.swing.JPanel();
         jLabel108 = new javax.swing.JLabel();
         returnBarcode = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        onReturnsSearchDesTxt = new javax.swing.JTextField();
         jLabel114 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        onReturnsCombo = new javax.swing.JComboBox<>();
         jLabel115 = new javax.swing.JLabel();
         jLabel116 = new javax.swing.JLabel();
         jLabel117 = new javax.swing.JLabel();
@@ -3110,6 +3110,12 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel114.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel114.setText("Description");
 
+        onReturnsCombo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                onReturnsComboItemStateChanged(evt);
+            }
+        });
+
         jLabel115.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel115.setText("Description");
 
@@ -3309,9 +3315,9 @@ public class AdminPanel extends javax.swing.JFrame {
                     .addGroup(ViewReturnPanelLayout.createSequentialGroup()
                         .addComponent(jLabel114)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(onReturnsSearchDesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(onReturnsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addComponent(jScrollPane13)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewReturnPanelLayout.createSequentialGroup()
@@ -3328,9 +3334,9 @@ public class AdminPanel extends javax.swing.JFrame {
                         .addComponent(returnBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2))
                     .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(onReturnsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel108, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(onReturnsSearchDesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel114, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(ViewReturnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ViewReturnPanelLayout.createSequentialGroup()
@@ -6027,6 +6033,32 @@ public class AdminPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton19ActionPerformed
 
+    private void onReturnsComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_onReturnsComboItemStateChanged
+        int index = onReturnsCombo.getSelectedIndex();
+        if (index != -1) {
+            Item i = (Item) searchCombModel.getElementAt(index);
+            if (i != null) {
+                ItemService itemService = (ItemService) context.getBean("ItemService");
+                try {
+                    List<Batch> allBatches = itemService.getItemsBatchesById(i.getId());
+                    listModel4.removeAllElements();
+                    listModelForBatchObjects.removeAllElements();
+                    for (Batch b : allBatches) {
+                        listModel4.addElement(b.getBatch());
+                        listModelForBatchObjects.addElement(b);
+                    }
+                    onReturnLISTBatch.setModel(listModel4);
+                    OnReturnBatchItemIDtxt.setText(i.getId() + "");
+                    onReturnPackSizeTxt.setText(i.getPackSize());
+                    onReturnDescriptionTxt.setText(i.getDescription());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, ex);
+                }
+
+            }
+        }
+    }//GEN-LAST:event_onReturnsComboItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -6155,7 +6187,6 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
@@ -6302,7 +6333,6 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel jlabeljhjha;
     private javax.swing.JLabel labelMFFDD;
     private javax.swing.JList<String> listOnBatchUpdate;
@@ -6345,6 +6375,8 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JTextField onReturnPackSizeTxt;
     private javax.swing.JTextField onReturnUnitPriceTxt;
     private javax.swing.JTextField onReturnbatchQtyOnHandTxt;
+    private javax.swing.JComboBox<String> onReturnsCombo;
+    private javax.swing.JTextField onReturnsSearchDesTxt;
     private javax.swing.JTextField onUpdateBarcodeTxt;
     private javax.swing.JFormattedTextField onUpdateBatchEXPtxt;
     private javax.swing.JTextField onUpdateBatchIdtxt;
@@ -6457,6 +6489,23 @@ public class AdminPanel extends javax.swing.JFrame {
                 warn1();
             }
         });
+        
+        onReturnsSearchDesTxt.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                warn8();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                warn8();
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                warn8();
+            }
+        });
 
         onGRNSearchByDescriptionTxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -6492,6 +6541,24 @@ public class AdminPanel extends javax.swing.JFrame {
         });
     }
 
+    private void warn8() {
+        String desc = onReturnsSearchDesTxt.getText();
+        boolean v1 = Validation.validateEmptyTextFeald(desc);
+        if (!v1) {
+            ItemService itemService = (ItemService) context.getBean("ItemService");
+            try {
+                List<Item> all = itemService.getItemsByDescriptionLike(desc);
+                onReturnsCombo.removeAllItems();
+                searchCombModel.removeAllElements();
+                for (Item i : all) {
+                    searchCombModel.addElement(i);
+                    onReturnsCombo.addItem(i.getDescription());
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+        }
+    }
     private void warn() {
         String desc = onUpdateSearchByDescTxt.getText();
         boolean v1 = Validation.validateEmptyTextFeald(desc);
