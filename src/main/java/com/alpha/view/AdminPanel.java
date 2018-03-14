@@ -358,6 +358,7 @@ public class AdminPanel extends javax.swing.JFrame {
         ViewReportsPane = new javax.swing.JPanel();
         jButton18 = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
+        jButton21 = new javax.swing.JButton();
         viewReOrderLevelPanel = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
         reOrderLevelTable = new javax.swing.JTable();
@@ -2628,6 +2629,16 @@ public class AdminPanel extends javax.swing.JFrame {
             }
         });
 
+        jButton21.setBackground(new java.awt.Color(51, 51, 51));
+        jButton21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton21.setForeground(new java.awt.Color(255, 255, 255));
+        jButton21.setText("View Orders");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ViewReportsPaneLayout = new javax.swing.GroupLayout(ViewReportsPane);
         ViewReportsPane.setLayout(ViewReportsPaneLayout);
         ViewReportsPaneLayout.setHorizontalGroup(
@@ -2636,7 +2647,8 @@ public class AdminPanel extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(ViewReportsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(728, Short.MAX_VALUE))
         );
         ViewReportsPaneLayout.setVerticalGroup(
@@ -2646,7 +2658,9 @@ public class AdminPanel extends javax.swing.JFrame {
                 .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(454, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(371, Short.MAX_VALUE))
         );
 
         viewPanel.add(ViewReportsPane, "card2");
@@ -6095,6 +6109,12 @@ public class AdminPanel extends javax.swing.JFrame {
         f.setVisible(true);
     }//GEN-LAST:event_jButton20ActionPerformed
 
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        ViewAllOrders v = new ViewAllOrders();
+        v.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        v.setVisible(true);
+    }//GEN-LAST:event_jButton21ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -6217,6 +6237,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
