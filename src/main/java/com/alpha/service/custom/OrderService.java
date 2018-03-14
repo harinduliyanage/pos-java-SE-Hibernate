@@ -9,6 +9,7 @@ import com.alpha.dto.OrderDTO;
 import com.alpha.model.OrderDetails;
 import com.alpha.model.Orders;
 import com.alpha.service.SuperService;
+import java.util.HashMap;
 import java.util.List;
 import org.joda.time.LocalDate;
 
@@ -22,4 +23,5 @@ public interface OrderService extends SuperService<Orders>{
     public List<Orders> getTodayTransaction(LocalDate localDate)throws Exception;
     public List<Orders> getBetweenTodaysTransaction(LocalDate day1,LocalDate day2)throws Exception;
     public List<OrderDetails> getOrderDetailsByOrderId(int id)throws Exception;
+    public HashMap<String,Integer> getPassMoveItems()throws Exception;
 }

@@ -96,11 +96,12 @@ public class OrdersDaoImpl implements OrdersDAO {
     }
 
     @Override
-    public HashMap<Integer, Integer> getPassMoveItems() throws Exception {
+    public HashMap<String, Integer> getPassMoveItems() throws Exception {
         Criteria cr = sessionFactory.getCurrentSession().createCriteria(Entity.class);
-        cr.setProjection(Projections.property("batch_id"));
+        cr.setProjection(Projections.property("description"));
         cr.setProjection(Projections.sum("orderOty"));
-        cr.setProjection(Projections.groupProperty("batch_id"));
+        cr.setProjection(Projections.groupProperty("description"));
+        cr.addOrder(Order.desc("SUM(orderOty)"));
         List list = cr.list();
         for (Object o : list) {
             
@@ -110,7 +111,7 @@ public class OrdersDaoImpl implements OrdersDAO {
 
 }
 /*
-SELECT batch_id,SUM(orderOty) FROM order_details GROUP BY batch_id;
+SELECT description, SUM(orderOty) FROM order_details GROUP BY description;
 */
 
 /*
