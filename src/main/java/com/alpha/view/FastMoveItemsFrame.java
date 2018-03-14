@@ -47,11 +47,6 @@ public class FastMoveItemsFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         MovedItemTable = new javax.swing.JTable();
-        startDateTxt = new javax.swing.JFormattedTextField();
-        endDateTxt = new javax.swing.JFormattedTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        loadBtn = new javax.swing.JButton();
         allAtThisTimeBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -93,33 +88,6 @@ public class FastMoveItemsFrame extends javax.swing.JFrame {
         MovedItemTable.setSelectionBackground(new java.awt.Color(204, 204, 204));
         jScrollPane1.setViewportView(MovedItemTable);
 
-        startDateTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
-
-        endDateTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Start Date");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("End Date");
-
-        loadBtn.setBackground(new java.awt.Color(51, 51, 51));
-        loadBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        loadBtn.setForeground(new java.awt.Color(255, 255, 255));
-        loadBtn.setText("Load");
-        loadBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadBtnActionPerformed(evt);
-            }
-        });
-        loadBtn.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                loadBtnKeyPressed(evt);
-            }
-        });
-
         allAtThisTimeBtn.setBackground(new java.awt.Color(51, 51, 51));
         allAtThisTimeBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         allAtThisTimeBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -140,24 +108,15 @@ public class FastMoveItemsFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(startDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addGap(17, 17, 17)
-                .addComponent(endDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(loadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(allAtThisTimeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(369, 369, 369)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(369, 369, 369)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(allAtThisTimeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(454, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,15 +124,9 @@ public class FastMoveItemsFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(startDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(endDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(loadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(allAtThisTimeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(allAtThisTimeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -200,16 +153,6 @@ public class FastMoveItemsFrame extends javax.swing.JFrame {
     private void allAtThisTimeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allAtThisTimeBtnActionPerformed
         setAllMovedQtyAtThisTime();
     }//GEN-LAST:event_allAtThisTimeBtnActionPerformed
-
-    private void loadBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loadBtnKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            loadBtn.doClick();
-        }
-    }//GEN-LAST:event_loadBtnKeyPressed
-
-    private void loadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadBtnActionPerformed
-        setBetWeenTowDaysMovedItem();
-    }//GEN-LAST:event_loadBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,14 +192,9 @@ public class FastMoveItemsFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable MovedItemTable;
     private javax.swing.JButton allAtThisTimeBtn;
-    private javax.swing.JFormattedTextField endDateTxt;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton loadBtn;
-    private javax.swing.JFormattedTextField startDateTxt;
     // End of variables declaration//GEN-END:variables
 
     private void setAllMovedQtyAtThisTime() {
@@ -279,8 +217,8 @@ public class FastMoveItemsFrame extends javax.swing.JFrame {
                 MovedItemTable.setModel(m);
                 centerRenderer.setHorizontalAlignment(JLabel.CENTER);
                 MovedItemTable.setDefaultRenderer(String.class, centerRenderer);
-            }else{
-                JOptionPane.showMessageDialog(this,"No such a item moved found");
+            } else {
+                JOptionPane.showMessageDialog(this, "No such a item moved found");
             }
 
         } catch (Exception ex) {
@@ -289,6 +227,5 @@ public class FastMoveItemsFrame extends javax.swing.JFrame {
     }
 
     private void setBetWeenTowDaysMovedItem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
