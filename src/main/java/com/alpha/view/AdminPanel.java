@@ -2604,6 +2604,7 @@ public class AdminPanel extends javax.swing.JFrame {
         jButton18.setBackground(new java.awt.Color(51, 51, 51));
         jButton18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton18.setForeground(new java.awt.Color(255, 255, 255));
+        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/reportLableIcon.png"))); // NOI18N
         jButton18.setText("Get Income between two days Report");
         jButton18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2619,6 +2620,7 @@ public class AdminPanel extends javax.swing.JFrame {
         jButton20.setBackground(new java.awt.Color(51, 51, 51));
         jButton20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton20.setForeground(new java.awt.Color(255, 255, 255));
+        jButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/reportLableIcon.png"))); // NOI18N
         jButton20.setText("Fast Moved Item Report");
         jButton20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2633,9 +2635,9 @@ public class AdminPanel extends javax.swing.JFrame {
             .addGroup(ViewReportsPaneLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(ViewReportsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                    .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(734, Short.MAX_VALUE))
+                .addContainerGap(728, Short.MAX_VALUE))
         );
         ViewReportsPaneLayout.setVerticalGroup(
             ViewReportsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3424,6 +3426,7 @@ public class AdminPanel extends javax.swing.JFrame {
         jButton11.setBackground(new java.awt.Color(51, 51, 51));
         jButton11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton11.setForeground(new java.awt.Color(255, 255, 255));
+        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/browsLable.png"))); // NOI18N
         jButton11.setText("Brows");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

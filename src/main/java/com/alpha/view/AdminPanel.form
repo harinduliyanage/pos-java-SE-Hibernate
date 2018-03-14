@@ -4155,10 +4155,10 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButton18" pref="359" max="32767" attributes="0"/>
+                              <Component id="jButton18" max="32767" attributes="0"/>
                               <Component id="jButton20" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="734" max="32767" attributes="0"/>
+                          <EmptySpace pref="728" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -4186,6 +4186,9 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/image/reportLableIcon.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Get Income between two days Report"/>
                   </Properties>
                   <Events>
@@ -4203,6 +4206,9 @@
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/image/reportLableIcon.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Fast Moved Item Report"/>
                   </Properties>
@@ -5656,6 +5662,9 @@
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/image/browsLable.png"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Brows"/>
                       </Properties>
