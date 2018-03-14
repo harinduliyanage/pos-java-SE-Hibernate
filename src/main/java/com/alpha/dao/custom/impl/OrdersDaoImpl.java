@@ -6,12 +6,15 @@
 package com.alpha.dao.custom.impl;
 
 import com.alpha.dao.custom.OrdersDAO;
+import com.alpha.model.OrderDetails;
 import com.alpha.model.Orders;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.Entity;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -68,11 +71,11 @@ public class OrdersDaoImpl implements OrdersDAO {
     @Override
     public int addOrder(Orders orders) throws Exception {
         Serializable save = sessionFactory.getCurrentSession().save(orders);
-        if (save!=null) {
+        if (save != null) {
             String val = save.toString();
             int id = Integer.parseInt(val);
             return id;
-        }else{
+        } else {
             return -1;
         }
     }
@@ -90,46 +93,23 @@ public class OrdersDaoImpl implements OrdersDAO {
     public List<Orders> getBetweenTwodayTransaction(LocalDate date, LocalDate day2) throws Exception {
         SQLQuery sql = sessionFactory
                 .getCurrentSession()
-                .createSQLQuery("select * from orders where (dates BETWEEN '"+date+"' AND '"+day2+"')");
+                .createSQLQuery("select * from orders where (dates BETWEEN '" + date + "' AND '" + day2 + "')");
         sql.addEntity(Orders.class);
-        return (List<Orders>)sql.list();
+        return (List<Orders>) sql.list();
     }
 
     @Override
-    public HashMap<String, Integer> getPassMoveItems() throws Exception {
-        Criteria cr = sessionFactory.getCurrentSession().createCriteria(Entity.class);
-        cr.setProjection(Projections.property("description"));
-        cr.setProjection(Projections.sum("orderOty"));
-        cr.setProjection(Projections.groupProperty("description"));
-        cr.addOrder(Order.desc("SUM(orderOty)"));
-        List list = cr.list();
-        for (Object o : list) {
-            
+    public HashMap<String, Double> getPassMoveItems() throws Exception {
+        Query q = sessionFactory.getCurrentSession()
+                .createSQLQuery("select description, SUM(orderOty) as MovedQty FROM order_details GROUP BY description ORDER BY MovedQty DESC");
+        Iterator iterator = q.list().iterator();
+        HashMap<String, Double> map = new HashMap<>();
+        while (iterator.hasNext()) {
+            Object[] result = (Object[]) iterator.next();
+            String description = (String) result[0];
+            double movedQty = (Double) result[1];
+            map.put(description, movedQty);
         }
-        return new HashMap<>();
+        return map;
     }
-
 }
-/*
-SELECT description, SUM(orderOty) FROM order_details GROUP BY description;
-*/
-
-/*
-// First, fetch first 20 elements' ids
-List<Integer> ids = session.createCriteria(Entity.class)
-        .setProjection(Projections.property("id"))
-        .setMaxResults(20)
-        .list();
-
-// Afterwards, do a sum on the desired field
-Long sum = (Long) session.createCriteria(Entity.class)
-        .setProjection(Projections.sum("propertyName"))
-        .add(Restrictions.in("id", ids))
-        .uniqueResult();
-
-
-
-*/
-
-
-//SELECT batch_id, GROUP_CONCAT(orderOTY SEPARATOR ' ') FROM order_details GROUP BY batch_id;

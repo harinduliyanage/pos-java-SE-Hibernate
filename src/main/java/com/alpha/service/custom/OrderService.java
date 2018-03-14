@@ -23,5 +23,5 @@ public interface OrderService extends SuperService<Orders>{
     public List<Orders> getTodayTransaction(LocalDate localDate)throws Exception;
     public List<Orders> getBetweenTodaysTransaction(LocalDate day1,LocalDate day2)throws Exception;
     public List<OrderDetails> getOrderDetailsByOrderId(int id)throws Exception;
-    public HashMap<String,Integer> getPassMoveItems()throws Exception;
+    public HashMap<String,Double> getPassMoveItems()throws Exception;
 }

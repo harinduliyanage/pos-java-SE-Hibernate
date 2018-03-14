@@ -9,8 +9,11 @@ import com.alpha.config.Context;
 import com.alpha.dto.UserDTO;
 import com.alpha.service.custom.BatchService;
 import com.alpha.service.custom.ItemService;
+import com.alpha.service.custom.OrderService;
 import com.alpha.service.custom.UserService;
 import com.alpha.view.Welcome;
+import java.util.HashMap;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,6 +32,7 @@ public class Main {
             UserService userService = (UserService) context.getBean("UserService");
             ItemService itemService = (ItemService) context.getBean("ItemService");
             BatchService batchService = (BatchService) context.getBean("BatchService");
+            OrderService orderService = (OrderService) context.getBean("OrderService");
             new Welcome().setVisible(true);
               //Create User
             UserDTO userDTO = new UserDTO();
@@ -36,7 +40,15 @@ public class Main {
             userDTO.setPassword("123");
             userDTO.setUserName("harindu.sul");
             userDTO.setName("Harindu Sulochana");
-
+            System.out.println("*****************");
+            HashMap<String, Double> passMoveItems = orderService.getPassMoveItems();
+            Set<String> keySet = passMoveItems.keySet();
+            for (String string : keySet) {
+                System.out.println("Key--"+string);
+                System.out.println("Val--"+passMoveItems.get(string));
+                
+            }
+            System.out.println("*****************");
             boolean add = userService.add(userDTO);
             if (add) {
                 System.out.println("User Added Succefully...");
@@ -44,6 +56,7 @@ public class Main {
             } else {
                 System.out.println("User Added Fail..");
             }
+            
            
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

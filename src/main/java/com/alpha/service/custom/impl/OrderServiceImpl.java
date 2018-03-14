@@ -137,7 +137,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public HashMap<String, Integer> getPassMoveItems() throws Exception {
+    public HashMap<String, Double> getPassMoveItems() throws Exception {
         return orderDAO.getPassMoveItems();
     }
 
