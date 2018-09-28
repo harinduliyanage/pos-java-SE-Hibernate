@@ -1,2 +1,2 @@
 # pos-java-SE-Hibernate
-![alt text](https://drive.google.com/file/d/1skTlMwGR1Qumz39Kz11peO9Yw2g43l0-/view?usp=sharing)
+![alt text](https://github.com/harinduliyanage/pos-java-SE-Hibernate/tree/master/src/main/resources/image/123.png)
