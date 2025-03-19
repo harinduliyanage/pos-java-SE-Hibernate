@@ -70,7 +70,7 @@ cd pos1
 
 ## Configuration
 
-Edit the `application.properties` or `hibernate.cfg.xml` file in `src/main/resources/` to match your database settings:
+Edit the `application.properties` file in `src/main/resources/` to match your database settings:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/pos_db
@@ -95,9 +95,6 @@ spring.datasource.password=password
 - **Database Connection Issues:** Verify MySQL service is running and credentials match.
 - **Dependency Issues:** Run `mvn clean install -U` to force update dependencies.
 
-## Contributors
-
-- **Your Name** ([your.email@example.com](mailto:your.email@example.com))
 
 For additional help, please raise an issue in the repository.
 
